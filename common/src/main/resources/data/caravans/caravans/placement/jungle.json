@@ -1,0 +1,40 @@
+{
+  "weight": 1000,
+  "biomes": "#caravans:has_jungle_caravan",
+  "pools": [
+    {
+      "weight": 2,
+      "variations": [
+        {
+          "variation": "caravans:jungle_cocoa_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:jungle_cocoa_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:jungle_cocoa_tier_3",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "weight": 1,
+      "variations": [
+        {
+          "variation": "caravans:jungle_exotics_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:jungle_exotics_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:jungle_exotics_tier_3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

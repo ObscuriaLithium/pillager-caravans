@@ -1,0 +1,22 @@
+{
+  "cooldown": 24000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:vindicator",
+      "count": 2
+    },
+    {
+      "type": "minecraft:pillager",
+      "count": 3
+    },
+    {
+      "type": "minecraft:llama",
+      "armor": "minecraft:red_carpet",
+      "cargo": "caravans:caravans/cargo/exotics",
+      "count": 4
+    }
+  ]
+}
