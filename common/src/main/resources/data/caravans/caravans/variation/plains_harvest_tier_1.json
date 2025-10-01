@@ -1,0 +1,17 @@
+{
+  "cooldown": 12000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:pillager",
+      "count": 2
+    },
+    {
+      "type": "minecraft:donkey",
+      "cargo": "caravans:caravans/cargo/harvest",
+      "count": 2
+    }
+  ]
+}

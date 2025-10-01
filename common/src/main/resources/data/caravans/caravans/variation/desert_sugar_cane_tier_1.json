@@ -1,0 +1,18 @@
+{
+  "cooldown": 12000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:pillager",
+      "count": 2
+    },
+    {
+      "type": "minecraft:llama",
+      "armor": "minecraft:lime_carpet",
+      "cargo": "caravans:caravans/cargo/sugar_cane",
+      "count": 2
+    }
+  ]
+}

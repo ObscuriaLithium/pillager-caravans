@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.obscuria.caravans.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinAbstractHorse",
+    "MixinLongDistancePatrolGoal",
+    "MixinLootTable",
+    "MixinMinecraftServer",
+    "MixinMob"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

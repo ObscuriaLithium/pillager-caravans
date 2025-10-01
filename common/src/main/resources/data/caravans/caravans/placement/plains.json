@@ -1,0 +1,40 @@
+{
+  "weight": 1000,
+  "biomes": "#caravans:has_plains_caravan",
+  "pools": [
+    {
+      "weight": 2,
+      "variations": [
+        {
+          "variation": "caravans:plains_harvest_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:plains_harvest_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:plains_harvest_tier_3",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "weight": 1,
+      "variations": [
+        {
+          "variation": "caravans:plains_dyes_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:plains_dyes_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:plains_dyes_tier_3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

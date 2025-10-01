@@ -1,0 +1,40 @@
+{
+  "weight": 1000,
+  "biomes": "#caravans:has_swamp_caravan",
+  "pools": [
+    {
+      "weight": 2,
+      "variations": [
+        {
+          "variation": "caravans:swamp_clay_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:swamp_clay_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:swamp_clay_tier_3",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "weight": 1,
+      "variations": [
+        {
+          "variation": "caravans:swamp_alchemy_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:swamp_alchemy_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:swamp_alchemy_tier_3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}
