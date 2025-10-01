@@ -28,21 +28,23 @@ Pillager Caravans make your world feel alive – because sometimes, the treasure
 
 <br>
 
-# <p style="text-align:center">Obscuria Collection Mods</p>
+# <p style="text-align:center">Explore More by Obscuria</p>
 
 <p style="text-align:center">
-  <a href="https://www.curseforge.com/minecraft/mc-mods/obscure-api-fabric" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/AhHvRAA.png" width="25%"/></a> 
-  <a href="https://www.curseforge.com/minecraft/mc-mods/aquamirae-fabric" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/QiC0VcZ.png" width="25%"/></a> 
-  <a href="https://www.curseforge.com/minecraft/mc-mods/obscure-tooltips" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/qkyDZ6A.png" width="25%"/></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/ob-aquamirae"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/aquamirae.png" width="45%" /></a> 
+  <a href="https://www.curseforge.com/minecraft/mc-mods/obscure-tooltips"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/obscure-tooltips.png" width="45%" /></a>
 </p>
 <p style="text-align:center">
-  <a href="https://www.curseforge.com/minecraft/mc-mods/loot-journal" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/1r2Ue5Y.png" width="25%"/></a> 
-  <img style="display:inline" src="https://i.imgur.com/xKaiQBp.png" width="25%"/> 
-  <img style="display:inline" src="https://i.imgur.com/xKaiQBp.png" width="25%"/>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/pillager-caravans.png" width="45%" /></a> 
+  <a href="https://www.curseforge.com/minecraft/mc-mods/ars-elixirum"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/ars-elixirum.png" width="45%" /></a>
 </p>
 <p style="text-align:center">
-  <a href="https://www.patreon.com/Obscuria" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/4lV9g9R.png" width="75%"/></a>
+  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" /> 
+  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" />
 </p>
 <p style="text-align:center">
-  <a href="https://discord.gg/jSHHJSUWdY" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/1Y7y8mO.png" width="75%"/></a>
+  <a href="https://www.patreon.com/Obscuria" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/4lV9g9R.png" width="90%"/></a>
+</p>
+<p style="text-align:center">
+  <a href="https://discord.gg/jSHHJSUWdY" rel="nofollow"><img style="display:inline" src="https://i.imgur.com/1Y7y8mO.png" width="90%"/></a>
 </p>

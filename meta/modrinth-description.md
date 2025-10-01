@@ -26,21 +26,23 @@ Pillager Caravans make your world feel alive – because sometimes, the treasure
 - `/gamerule doCaravanSpawning <true|false>` - Toggles natural spawning of caravans in the world.
 - `/caravan spawn <pos> <type>` - Spawns a caravan of the chosen type at your location.
 
-# <center>Obscuria Collection Mods</center>
+# <center>Explore More by Obscuria</center>
 
 <center>
-  <a href="https://modrinth.com/mod/obscure-api"><img style="display: inline;" src="https://i.imgur.com/AhHvRAA.png" width="25%" /></a> 
-  <a href="https://modrinth.com/mod/aquamirae"><img style="display: inline;" src="https://i.imgur.com/QiC0VcZ.png" width="25%" /></a> 
-  <a href="https://modrinth.com/mod/obscure-tooltips"><img style="display: inline;" src="https://i.imgur.com/qkyDZ6A.png" width="25%" /></a>
+  <a href="https://modrinth.com/mod/aquamirae"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/aquamirae.png" width="45%" /></a> 
+  <a href="https://modrinth.com/mod/obscure-tooltips"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/obscure-tooltips.png" width="45%" /></a>
 </center>
 <center>
-  <a href="https://modrinth.com/mod/loot-journal"><img style="display: inline;" src="https://i.imgur.com/1r2Ue5Y.png" width="25%" /></a> 
-  <img style="display: inline;" src="https://i.imgur.com/xKaiQBp.png" width="25%" /> 
-  <img style="display: inline;" src="https://i.imgur.com/xKaiQBp.png" width="25%" />
+  <a href="https://modrinth.com/mod/pillager-caravans"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/pillager-caravans.png" width="45%" /></a> 
+  <a href="https://modrinth.com/mod/ars-elixirum"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/ars-elixirum.png" width="45%" /></a>
 </center>
 <center>
-  <a href="https://www.patreon.com/Obscuria"><img style="display: inline;" src="https://i.imgur.com/4lV9g9R.png" width="75%" /></a>
+  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" /> 
+  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" />
 </center>
 <center>
-  <a href="https://discord.gg/jSHHJSUWdY"><img style="display: inline;" src="https://i.imgur.com/1Y7y8mO.png" width="75%" /></a>
+  <a href="https://www.patreon.com/Obscuria"><img style="display: inline;" src="https://i.imgur.com/4lV9g9R.png" width="90%" /></a>
+</center>
+<center>
+  <a href="https://discord.gg/jSHHJSUWdY"><img style="display: inline;" src="https://i.imgur.com/1Y7y8mO.png" width="90%" /></a>
 </center>
