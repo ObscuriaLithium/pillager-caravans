@@ -24,6 +24,6 @@ public interface CaravanRegistries {
 
     static void init() {
         REGISTRAR.createSyncedDataRegistry(Keys.VARIATION, () -> CaravanVariation.DIRECT_CODEC);
-        REGISTRAR.createSyncedDataRegistry(Keys.PLACEMENT, () -> CaravanPlacement.DIRECT_CODEC);
+        REGISTRAR.createDataRegistry(Keys.PLACEMENT, () -> CaravanPlacement.DIRECT_CODEC);
     }
 }

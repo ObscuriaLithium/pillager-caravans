@@ -28,6 +28,7 @@ loom {
     runs {
         client {
             client()
+            programArgs "--username", "Dev"
             setConfigName("Fabric Client")
             ideConfigGenerated(true)
             runDir("run")

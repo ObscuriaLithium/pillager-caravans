@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.level.levelgen.Heightmap;
-import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
@@ -37,15 +36,14 @@ public record CaravanVariation(
         pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
         if (leader.spawn(level, pos, true) == null) return 0;
 
-        final var entities = Lists.<Entity>newArrayList();
+        final var entities = new ArrayList<Entity>();
         for (var member : members) {
             for (var i = 0; i < member.count(); i++) {
                 pos.setX(pos.getX() + random.nextInt(3) - random.nextInt(3));
                 pos.setZ(pos.getZ() + random.nextInt(3) - random.nextInt(3));
                 pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
                 final @Nullable var entity = member.spawn(level, pos, false);
-                if (entity == null) continue;
-                entities.add(entity);
+                if (entity != null) entities.add(entity);
             }
         }
 

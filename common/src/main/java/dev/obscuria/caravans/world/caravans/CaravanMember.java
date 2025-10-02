@@ -40,28 +40,16 @@ public record CaravanMember(
 
         final var state = level.getBlockState(pos);
         final var fluidState = state.getFluidState();
-        if (!NaturalSpawner.isValidEmptySpawnBlock(level, pos, state, fluidState, EntityType.PILLAGER)) return null;
+        if (!NaturalSpawner.isValidEmptySpawnBlock(level, pos, state, fluidState, type)) return null;
         final @Nullable var entity = type.create(level);
         if (entity == null) return null;
+
+        entity.setPos(pos.getX(), pos.getY(), pos.getZ());
 
         if (isLeader && entity instanceof PatrollingMonster patrollingMonster) {
             patrollingMonster.setPatrolLeader(true);
             patrollingMonster.findPatrolTarget();
         }
-
-        entity.setPos(pos.getX(), pos.getY(), pos.getZ());
-
-        if (entity instanceof Mob mob) {
-            final var difficulty = level.getCurrentDifficultyAt(pos);
-            mob.finalizeSpawn(level, difficulty, MobSpawnType.PATROL, null, null);
-        }
-
-        finalize(level, entity);
-        level.addFreshEntityWithPassengers(entity);
-        return entity;
-    }
-
-    private void finalize(ServerLevel level, Entity entity) {
 
         if (entity instanceof AbstractHorse horse) {
             horse.setTamed(true);
@@ -73,6 +61,14 @@ public record CaravanMember(
             IHorseExtension.createInventory(chested);
             cargoTable.ifPresent(cargo -> generateCargo(level, chested, cargo));
         }
+
+        if (entity instanceof Mob mob) {
+            final var difficulty = level.getCurrentDifficultyAt(pos);
+            mob.finalizeSpawn(level, difficulty, MobSpawnType.PATROL, null, null);
+        }
+
+        level.addFreshEntityWithPassengers(entity);
+        return entity;
     }
 
     private void generateCargo(ServerLevel level, AbstractChestedHorse entity, ResourceLocation cargo) {
