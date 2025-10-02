@@ -18,7 +18,7 @@ public final class CaravanCommand {
             CommandBuildContext registryAccess,
             Commands.CommandSelection environment
     ) {
-        dispatcher.register(Commands.literal("caravan")
+        dispatcher.register(Commands.literal("caravan").requires(it -> it.hasPermission(2))
                 .then(Commands.literal("spawn")
                         .then(Commands.argument("position", BlockPosArgument.blockPos())
                                 .then(Commands.argument("variation", ResourceArgument.resource(registryAccess, CaravanRegistries.Keys.VARIATION))
