@@ -51,6 +51,11 @@ public record CaravanMember(
             patrollingMonster.findPatrolTarget();
         }
 
+        if (entity instanceof Mob mob) {
+            final var difficulty = level.getCurrentDifficultyAt(pos);
+            mob.finalizeSpawn(level, difficulty, MobSpawnType.PATROL, null, null);
+        }
+
         if (entity instanceof AbstractHorse horse) {
             horse.setTamed(true);
             armorItem.ifPresent(armor -> IHorseExtension.equipArmor(horse, armor.getDefaultInstance()));
@@ -60,11 +65,6 @@ public record CaravanMember(
             chested.setChest(true);
             IHorseExtension.createInventory(chested);
             cargoTable.ifPresent(cargo -> generateCargo(level, chested, cargo));
-        }
-
-        if (entity instanceof Mob mob) {
-            final var difficulty = level.getCurrentDifficultyAt(pos);
-            mob.finalizeSpawn(level, difficulty, MobSpawnType.PATROL, null, null);
         }
 
         level.addFreshEntityWithPassengers(entity);
