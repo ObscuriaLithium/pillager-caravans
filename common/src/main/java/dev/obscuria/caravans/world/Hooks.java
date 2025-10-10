@@ -3,6 +3,7 @@ package dev.obscuria.caravans.world;
 import com.google.common.collect.ImmutableList;
 import dev.obscuria.caravans.world.caravans.CaravanSpawner;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.CustomSpawner;
 import org.jetbrains.annotations.ApiStatus;
@@ -21,6 +22,7 @@ public interface Hooks {
         final @Nullable var holder = mob.getLeashHolder();
         if (holder == null || !holder.isRemoved()) return;
         if (holder.getRemovalReason() != Entity.RemovalReason.DISCARDED) return;
+        if (!(holder instanceof LivingEntity living) || !ILivingExtension.isCaravanMember(living)) return;
         mob.dropLeash(false, false);
         mob.discard();
     }

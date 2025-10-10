@@ -3,14 +3,12 @@ package dev.obscuria.caravans.world.caravans;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.obscuria.caravans.world.IHorseExtension;
+import dev.obscuria.caravans.world.ILivingExtension;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.PatrollingMonster;
@@ -45,6 +43,10 @@ public record CaravanMember(
         if (entity == null) return null;
 
         entity.setPos(pos.getX(), pos.getY(), pos.getZ());
+
+        if (entity instanceof LivingEntity living) {
+            ILivingExtension.setCaravanMember(living, true);
+        }
 
         if (isLeader && entity instanceof PatrollingMonster patrollingMonster) {
             patrollingMonster.setPatrolLeader(true);
