@@ -1,9 +1,9 @@
-package dev.obscuria.caravans.world.caravans;
+package dev.obscuria.caravans.content.caravans;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.world.IHorseExtension;
-import dev.obscuria.caravans.world.ILivingExtension;
+import dev.obscuria.caravans.content.IHorseExtension;
+import dev.obscuria.caravans.content.ILivingExtension;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

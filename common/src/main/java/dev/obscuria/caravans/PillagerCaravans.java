@@ -1,6 +1,7 @@
 package dev.obscuria.caravans;
 
-import dev.obscuria.caravans.registry.CaravanRegistries;
+import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import dev.obscuria.caravans.server.CaravanCommand;
 import dev.obscuria.fragmentum.server.FragmentumServerRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +25,7 @@ public final class PillagerCaravans {
     }
 
     public static void init() {
+        CaravanConfig.init();
         CaravanRegistries.init();
         FragmentumServerRegistry.registerCommand(CaravanCommand::register);
     }

@@ -1,6 +1,10 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev.legacyforge'
+    id 'net.darkhax.curseforgegradle'
+    id "com.modrinth.minotaur"
 }
 
 mixin {
@@ -45,12 +49,14 @@ legacyForge {
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
+
+    // Mixins
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
 
+    // Common
     modImplementation("dev.obscuria:fragmentum-forge:1.20.1-${fragmentum_version}")
-    modImplementation("curse.maven:emi-580555:6420945")
     compileOnly project(":common")
 }
 
@@ -69,4 +75,45 @@ tasks.register("releaseForge") {
             into(rootProject.file("output/$version"))
         }
     }
+}
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    dependsOn(tasks.named("releaseForge"))
+    description = 'Publishes the Forge build to CurseForge.'
+    group = 'publishing'
+
+    apiToken = System.getenv("CF_TOKEN")
+    def file = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+    def artifact = upload(curseforge_id, file)
+
+    artifact.displayName = "${mod_name} ${project.version}"
+    artifact.changelogType = "markdown"
+    artifact.changelog = rootProject.file('CHANGELOG.md').text
+    artifact.releaseType = release_type
+
+    artifact.addEnvironment("Server", "Client")
+    artifact.addGameVersion("Forge", minecraft_version, "Java ${java_version}")
+    artifact.addRequirement("fragmentum-forge")
+
+    debugMode = release_debug_mode.toBoolean()
+}
+
+modrinth {
+
+    token = System.getenv("MD_TOKEN")
+    projectId = modrinth_id
+    uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+
+    versionName = "${mod_name} ${project.version}"
+    versionNumber = "${project.version}"
+    versionType = release_type
+    changelog = rootProject.file("CHANGELOG.md").text
+
+    gameVersions = ["${minecraft_version}"]
+    loaders = ["forge"]
+    dependencies {
+        required.project("fragmentum")
+    }
+
+    debugMode = release_debug_mode.toBoolean()
 }

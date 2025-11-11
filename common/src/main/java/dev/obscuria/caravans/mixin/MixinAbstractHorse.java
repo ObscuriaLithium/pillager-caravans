@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin;
 
-import dev.obscuria.caravans.world.IHorseExtension;
+import dev.obscuria.caravans.content.IHorseExtension;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.item.ItemStack;

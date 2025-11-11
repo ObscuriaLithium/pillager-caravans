@@ -1,20 +1,29 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
+    id 'net.darkhax.curseforgegradle'
+    id "com.modrinth.minotaur"
 }
 
 dependencies {
+
+    // Minecraft
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
     }
 
-    modImplementation("dev.obscuria:fragmentum-fabric:1.20.1-${fragmentum_version}")
+    // Fabric
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modImplementation("com.terraformersmc:modmenu:7.2.2")
 
+    // Common
+    modImplementation("dev.obscuria:fragmentum-fabric:1.20.1-${fragmentum_version}")
+    modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:8.0.0")
     implementation project(":common")
 }
 
@@ -50,4 +59,48 @@ tasks.register("releaseFabric") {
             into(rootProject.file("output/$version"))
         }
     }
+}
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    dependsOn(tasks.named("releaseFabric"))
+    description = 'Publishes the Fabric build to CurseForge.'
+    group = 'publishing'
+
+    apiToken = System.getenv("CF_TOKEN")
+    def file = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+    def artifact = upload(curseforge_id, file)
+
+    artifact.displayName = "${mod_name} ${project.version}"
+    artifact.changelogType = "markdown"
+    artifact.changelog = rootProject.file('CHANGELOG.md').text
+    artifact.releaseType = release_type
+
+    artifact.addEnvironment("Server", "Client")
+    artifact.addGameVersion("Fabric", "Quilt", minecraft_version, "Java ${java_version}")
+    artifact.addRequirement("fabric-api", "fragmentum-fabric")
+    artifact.addOptional("modmenu")
+
+    debugMode = release_debug_mode.toBoolean()
+}
+
+modrinth {
+
+    token = System.getenv("MD_TOKEN")
+    projectId = modrinth_id
+    uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+
+    versionName = "${mod_name} ${project.version}"
+    versionNumber = "${project.version}"
+    versionType = release_type
+    changelog = rootProject.file("CHANGELOG.md").text
+
+    gameVersions = ["${minecraft_version}"]
+    loaders = ["fabric", "quilt"]
+    dependencies {
+        required.project("fabric-api")
+        required.project("fragmentum")
+        optional.project("modmenu")
+    }
+
+    debugMode = release_debug_mode.toBoolean()
 }

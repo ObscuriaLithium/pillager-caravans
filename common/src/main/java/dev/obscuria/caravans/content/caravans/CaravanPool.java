@@ -1,8 +1,8 @@
-package dev.obscuria.caravans.world.caravans;
+package dev.obscuria.caravans.content.caravans;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.world.IWeighted;
+import dev.obscuria.caravans.content.IWeighted;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;

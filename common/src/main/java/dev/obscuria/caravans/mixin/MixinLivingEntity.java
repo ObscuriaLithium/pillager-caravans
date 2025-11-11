@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin;
 
-import dev.obscuria.caravans.world.ILivingExtension;
+import dev.obscuria.caravans.content.ILivingExtension;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

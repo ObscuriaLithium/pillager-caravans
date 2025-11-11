@@ -1,8 +1,9 @@
-package dev.obscuria.caravans.world.caravans;
+package dev.obscuria.caravans.content.caravans;
 
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.caravans.registry.CaravanRegistries;
-import dev.obscuria.caravans.world.IWeighted;
+import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.content.registry.CaravanRegistries;
+import dev.obscuria.caravans.content.IWeighted;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -12,10 +13,9 @@ import org.jetbrains.annotations.Nullable;
 
 public final class CaravanSpawner implements CustomSpawner {
 
-    private static final int ATTEMPT_INTERVAL = 1200;
-    private static final int DISTANCE = 32;
-    private static final int SPREAD = 32;
-    private int cooldownTick = 12000;
+    public static final CaravanSpawner INSTANCE = new CaravanSpawner();
+
+    public int cooldownTick = 12000;
 
     @Override
     public int tick(ServerLevel level, boolean spawnHostile, boolean spawnFriendly) {
@@ -30,15 +30,15 @@ public final class CaravanSpawner implements CustomSpawner {
 
         final var totalSpawned = caravan.value().spawn(level, pos);
         if (totalSpawned <= 0) return 0;
-        cooldownTick = caravan.value().cooldown();
+        cooldownTick = caravan.value().actualCooldown();
         return totalSpawned;
     }
 
     private boolean shouldSpawn(ServerLevel level, boolean spawnHostile) {
         if (!spawnHostile || !level.getGameRules().getBoolean(PillagerCaravans.RULE_DO_CARAVAN_SPAWNING)) return false;
         if (--cooldownTick > 0) return false;
-        cooldownTick = ATTEMPT_INTERVAL;
-        return level.getDayTime() / 24000L >= 1;
+        cooldownTick = CaravanConfig.common.spawning.failedCooldown;
+        return level.getDayTime() / CaravanConfig.common.spawning.worldAgeRequired >= 1;
     }
 
     private @Nullable ServerPlayer selectPlayer(ServerLevel level) {
@@ -53,8 +53,10 @@ public final class CaravanSpawner implements CustomSpawner {
     @SuppressWarnings("deprecation")
     private @Nullable BlockPos.MutableBlockPos selectPosition(ServerLevel level, ServerPlayer player) {
         final var random = level.random;
-        final var xOffset = (DISTANCE + random.nextInt(SPREAD)) * (random.nextBoolean() ? -1 : 1);
-        final var yOffset = (DISTANCE + random.nextInt(SPREAD)) * (random.nextBoolean() ? -1 : 1);
+        final var distance = CaravanConfig.common.spawning.distance;
+        final var variance = CaravanConfig.common.spawning.distanceVariance;
+        final var xOffset = (distance + random.nextInt(variance)) * (random.nextBoolean() ? -1 : 1);
+        final var yOffset = (distance + random.nextInt(variance)) * (random.nextBoolean() ? -1 : 1);
         final var pos = player.blockPosition().mutable().move(xOffset, 0, yOffset);
         if (!level.hasChunksAt(pos.getX() - 10, pos.getZ() - 10, pos.getX() + 10, pos.getZ() + 10)) return null;
         return pos;

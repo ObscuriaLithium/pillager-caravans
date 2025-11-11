@@ -29,16 +29,16 @@ Pillager Caravans make your world feel alive – because sometimes, the treasure
 # <center>Explore More by Obscuria</center>
 
 <center>
-  <a href="https://modrinth.com/mod/aquamirae"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/aquamirae.png" width="45%" /></a> 
-  <a href="https://modrinth.com/mod/obscure-tooltips"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/obscure-tooltips.png" width="45%" /></a>
+  <a href="https://modrinth.com/mod/aquamirae"><img style="display: inline;" src="https://i.imgur.com/AWVa1rL.png" width="45%" /></a> 
+  <a href="https://modrinth.com/mod/obscure-tooltips"><img style="display: inline;" src="https://i.imgur.com/K0F3Uyq.png" width="45%" /></a>
 </center>
 <center>
-  <a href="https://modrinth.com/mod/pillager-caravans"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/pillager-caravans.png" width="45%" /></a> 
-  <a href="https://modrinth.com/mod/ars-elixirum"><img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/ars-elixirum.png" width="45%" /></a>
+  <a href="https://modrinth.com/mod/pillager-caravans"><img style="display: inline;" src="https://i.imgur.com/lPK6BrB.png" width="45%" /></a> 
+  <a href="https://modrinth.com/mod/ars-elixirum"><img style="display: inline;" src="https://i.imgur.com/zMZKr3b.png" width="45%" /></a>
 </center>
 <center>
-  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" /> 
-  <img style="display: inline;" src="https://raw.githubusercontent.com/ObscuriaLithium/obscuria-collection-meta/refs/heads/main/cards/blank-modrinth.png" width="45%" />
+  <img style="display: inline;" src="https://i.imgur.com/rjJSLI0.png" width="45%" /> 
+  <img style="display: inline;" src="https://i.imgur.com/rjJSLI0.png" width="45%" />
 </center>
 <center>
   <a href="https://www.patreon.com/Obscuria"><img style="display: inline;" src="https://i.imgur.com/4lV9g9R.png" width="90%" /></a>

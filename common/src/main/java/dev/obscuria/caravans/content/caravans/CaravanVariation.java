@@ -1,8 +1,9 @@
-package dev.obscuria.caravans.world.caravans;
+package dev.obscuria.caravans.content.caravans;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.registry.CaravanRegistries;
+import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFixedCodec;
@@ -28,6 +29,10 @@ public record CaravanVariation(
 
     public static final Codec<Holder<CaravanVariation>> CODEC;
     public static final Codec<CaravanVariation> DIRECT_CODEC;
+
+    public int actualCooldown() {
+        return (int) (cooldown * CaravanConfig.common.spawning.cooldownMultiplier);
+    }
 
     public int spawn(ServerLevel level, BlockPos position) {
 

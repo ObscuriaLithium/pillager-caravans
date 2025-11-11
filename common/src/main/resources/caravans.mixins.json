@@ -10,7 +10,8 @@
     "MixinLongDistancePatrolGoal",
     "MixinLootTable",
     "MixinMinecraftServer",
-    "MixinMob"
+    "MixinMob",
+    "ResourceKeyArgumentAccessor"
   ],
   "client": [],
   "server": [],

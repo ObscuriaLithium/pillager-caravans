@@ -1,8 +1,8 @@
-package dev.obscuria.caravans.registry;
+package dev.obscuria.caravans.content.registry;
 
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.caravans.world.caravans.CaravanPlacement;
-import dev.obscuria.caravans.world.caravans.CaravanVariation;
+import dev.obscuria.caravans.content.caravans.CaravanPlacement;
+import dev.obscuria.caravans.content.caravans.CaravanVariation;
 import dev.obscuria.fragmentum.registry.FragmentumRegistry;
 import dev.obscuria.fragmentum.registry.Registrar;
 import net.minecraft.core.Registry;
@@ -23,7 +23,7 @@ public interface CaravanRegistries {
     }
 
     static void init() {
-        REGISTRAR.createSyncedDataRegistry(Keys.VARIATION, () -> CaravanVariation.DIRECT_CODEC);
+        REGISTRAR.createDataRegistry(Keys.VARIATION, () -> CaravanVariation.DIRECT_CODEC);
         REGISTRAR.createDataRegistry(Keys.PLACEMENT, () -> CaravanPlacement.DIRECT_CODEC);
     }
 }

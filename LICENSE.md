@@ -1,4 +1,4 @@
-# Copyright © Obscuria. All Rights Reserved.
+# Obscuria Limited-Use License
 
 -----
 

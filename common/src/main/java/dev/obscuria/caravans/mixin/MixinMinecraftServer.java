@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin;
 
-import dev.obscuria.caravans.world.Hooks;
+import dev.obscuria.caravans.content.Hooks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.CustomSpawner;
 import org.spongepowered.asm.mixin.Mixin;

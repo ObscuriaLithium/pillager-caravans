@@ -1,3 +1,8 @@
 {
-  "gamerule.doCaravanSpawning": "Spawn caravans"
+  "gamerule.doCaravanSpawning": "Spawn caravans",
+  "commands.caravan.cooldown.get": "Cooldown: %s ticks",
+  "commands.caravan.cooldown.reset": "Cooldown reset",
+  "commands.caravan.cooldown.set": "Cooldown set to %s ticks",
+  "commands.caravan.spawn.invalid": "There is no variation with type \"%s\"",
+  "commands.caravan.spawn.success": "Spawned \"%s\" at %s, %s, %s"
 }

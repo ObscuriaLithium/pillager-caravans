@@ -1,0 +1,5 @@
+- Added a configuration file with global spawning settings for better customization (`config/obscuria/pillager_caravans-common.toml`).
+- Adjusted base caravan spawn cooldowns – now doubled to improve pacing.
+- Added support for Convention biome tags to allow caravan spawning in modded biomes without manual configuration.
+- Added a new command for interacting with the caravan spawn cooldown system.
+- Added missing command feedback messages for improved clarity.

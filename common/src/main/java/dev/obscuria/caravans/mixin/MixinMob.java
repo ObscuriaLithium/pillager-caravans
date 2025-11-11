@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin;
 
-import dev.obscuria.caravans.world.Hooks;
+import dev.obscuria.caravans.content.Hooks;
 import net.minecraft.world.entity.Mob;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

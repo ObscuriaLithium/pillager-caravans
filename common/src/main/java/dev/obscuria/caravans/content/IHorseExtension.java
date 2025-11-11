@@ -1,4 +1,4 @@
-package dev.obscuria.caravans.world;
+package dev.obscuria.caravans.content;
 
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
