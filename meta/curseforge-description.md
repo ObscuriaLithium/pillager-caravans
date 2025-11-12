@@ -23,8 +23,9 @@
 
 <p style="text-align:center"><img width=90% src=https://i.imgur.com/vZdhqBr.png></p>
 
-- `/gamerule doCaravanSpawning <true|false>` - Toggles natural spawning of caravans in the world.
-- `/caravan spawn <pos> <type>` - Spawns a caravan of the chosen type at your location.
+- `/gamerule doCaravanSpawning <true|false>` – Toggles natural caravan spawning in the world.
+- `/caravan spawn <pos> <type>` – Spawns a caravan of the specified type.
+- `/caravan cooldown <get|set|reset>` – Checks or modifies the active cooldown timer for natural caravan spawning.
 
 <br>
 

@@ -1,32 +1,46 @@
 <img width=100% src="https://cdn.modrinth.com/data/8jJHxtdz/images/7a46bfe2e37259a40135870a2f9de9b7eac13bce.jpeg">
 
 <center>
-<a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="Fabric" src="https://img.shields.io/badge/Fabric-215b37?style=for-the-badge"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="Forge" src="https://img.shields.io/badge/Forge-215b37?style=for-the-badge"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="NeoForge" src="https://img.shields.io/badge/Neo_Forge-215b37?style=for-the-badge"></a>
-<a href="https://discord.gg/jSHHJSUWdY" target="_blank" rel="nofollow"><img alt="Discord" src="https://img.shields.io/discord/899742852681191444?style=for-the-badge&logo=discord&logoColor=white&label=&labelColor=231C25&color=21405b"></a>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="Fabric" src="https://img.shields.io/badge/Fabric-215b37?style=for-the-badge"></a>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="Forge" src="https://img.shields.io/badge/Forge-215b37?style=for-the-badge"></a>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/pillager-caravans" rel="nofollow"><img alt="NeoForge" src="https://img.shields.io/badge/Neo_Forge-215b37?style=for-the-badge"></a>
+    <a href="https://discord.gg/jSHHJSUWdY" target="_blank" rel="nofollow"><img alt="Discord" src="https://img.shields.io/discord/899742852681191444?style=for-the-badge&logo=discord&logoColor=white&label=&labelColor=231C25&color=21405b"></a>
 </center>
 
 <br>
 
-<center>Pillager Caravans adds roaming, cargo-filled convoys guarded by pillagers, vindicators, and even ravagers. Instead of static treasure chests, caravans travel across biomes – sometimes near your base – with cargo that changes depending on the environment.</center>
+### <center>Pillager Caravans adds roaming, cargo-filled convoys guarded by pillagers, vindicators, and even ravagers. Instead of static treasure chests, caravans travel across biomes – sometimes near your base – with cargo that changes depending on the environment.</center>
 
-# <center>Features</center>
+<br>
 
-- 🚩 **Roaming Caravans** – Convoys travel across the world instead of sitting still, creating dynamic encounters.
-- 🌍 **Biome-Themed Cargo** – Each biome offers its own pool of possible goods and supplies.
-- ⚔️ **Scaling Difficulty** – Caravans come in small, medium, and large sizes, with guards ranging from pillagers to ravagers.
-- 🐪 **Pack Animals with Cargo** – llamas, mules and donkeys carry loot tables instead of just being decoration.
-- 🔧 **Fully Data-Driven** – Built entirely data-driven. You can customize every aspect: caravan compositions, cargo tables, spawn rules, cooldowns, or even add entirely new caravan types without touching the code. For more details, check out the [documentation page](https://obscurialithium.github.io/pillager-caravans/).
+<center><img width=80% src=https://i.imgur.com/2n2UHQP.png></center>
+
+<br>
+
+- 🚩 <span style="color:#CED4D9;">**Roaming Caravans**</span> – Convoys travel across the world instead of sitting still, creating dynamic encounters.
+- 🌍 <span style="color:#CED4D9;">**Biome-Themed Cargo**</span> – Each biome offers its own pool of possible goods and supplies.
+- ⚔️ <span style="color:#CED4D9;">**Scaling Difficulty**</span> – Caravans vary in size and strength, from pillagers to ravagers.
+- 🐪 <span style="color:#CED4D9;">**Pack Animals with Cargo**</span> – Llamas, mules and donkeys carry loot tables instead of just being decoration.
+- 🔧 <span style="color:#CED4D9;">**Fully Data-Driven**</span> – You can customize every aspect: caravan compositions, cargo tables, spawn rules, cooldowns, or even add entirely new caravan types without touching the code. For more details, check out the [documentation page](https://obscurialithium.github.io/pillager-caravans/).
 
 Pillager Caravans make your world feel alive – because sometimes, the treasure won’t wait in a dungeon. It marches past your doorstep.
 
-# <center>Commands & Rules</center>
+<br>
 
-- `/gamerule doCaravanSpawning <true|false>` - Toggles natural spawning of caravans in the world.
-- `/caravan spawn <pos> <type>` - Spawns a caravan of the chosen type at your location.
+<center><img width=80% src=https://i.imgur.com/vZdhqBr.png></center>
 
-# <center>Explore More by Obscuria</center>
+<br>
+
+- `/gamerule doCaravanSpawning <true|false>` – Toggles natural caravan spawning in the world.
+- `/caravan spawn <pos> <type>` – Spawns a caravan of the specified type.
+- `/caravan cooldown <get|set|reset>` – Checks or modifies the active cooldown timer for natural caravan spawning.
+
+
+<br>
+
+<center><img width=80% src=https://i.imgur.com/k8Auyfy.png></center>
+
+<br>
 
 <center>
   <a href="https://modrinth.com/mod/aquamirae"><img style="display: inline;" src="https://i.imgur.com/AWVa1rL.png" width="45%" /></a> 
