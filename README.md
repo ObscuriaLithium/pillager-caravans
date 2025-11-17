@@ -9,6 +9,9 @@
 
 Pillager Caravans adds roaming, cargo-filled convoys guarded by pillagers, vindicators, and even ravagers. Instead of static treasure chests, caravans travel across biomes – sometimes near your base – with cargo that changes depending on the environment.
 
+### Documentation
+- [Core concept and customization](https://obscurialithium.github.io/pillager-caravans/)
+
 ### Project Pages
 
 - [Curseforge](https://www.curseforge.com/minecraft/mc-mods/pillager-caravans)
