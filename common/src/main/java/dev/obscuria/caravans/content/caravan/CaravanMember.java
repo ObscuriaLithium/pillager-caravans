@@ -5,7 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.obscuria.caravans.content.IHorseExtension;
 import dev.obscuria.caravans.content.ILivingExtension;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
@@ -37,7 +39,7 @@ public record CaravanMember(
     public static final Codec<CaravanMember> CODEC;
     public static boolean generatingCaravanCargo;
 
-    public @Nullable Entity spawn(ServerLevel level, BlockPos pos, boolean isLeader) {
+    public @Nullable Entity spawn(Holder<CaravanVariation> variation, ServerLevel level, BlockPos pos, boolean isLeader) {
 
         final var state = level.getBlockState(pos);
         final var fluidState = state.getFluidState();
@@ -51,9 +53,11 @@ public record CaravanMember(
             ILivingExtension.setCaravanMember(living, true);
         }
 
-        if (isLeader && entity instanceof PatrollingMonster patrollingMonster) {
-            patrollingMonster.setPatrolLeader(true);
-            patrollingMonster.findPatrolTarget();
+        if (isLeader && entity instanceof PatrollingMonster monster) {
+            monster.setPatrolLeader(true);
+            monster.findPatrolTarget();
+            final @Nullable var type = variation.unwrapKey().map(ResourceKey::location).orElse(null);
+            ILivingExtension.setCaravanType(monster, type);
         }
 
         if (entity instanceof Mob mob) {

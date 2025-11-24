@@ -1,7 +1,11 @@
 package dev.obscuria.caravans.content;
 
 import com.google.common.collect.ImmutableList;
+import dev.obscuria.caravans.config.CaravanConfig;
 import dev.obscuria.caravans.content.caravan.CaravanSpawner;
+import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
+import dev.obscuria.fragmentum.network.FragmentumNetworking;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -14,6 +18,23 @@ public interface Hooks {
 
     static ImmutableList<CustomSpawner> injectSpawners(List<CustomSpawner> spawners) {
         return ImmutableList.<CustomSpawner>builder().addAll(spawners).add(CaravanSpawner.INSTANCE).build();
+    }
+
+    static void onLivingTick(LivingEntity entity) {
+        if (!CaravanConfig.common.showEncounterToast) return;
+        if (entity.level().isClientSide()) return;
+        if (entity.tickCount % 40 != 0) return;
+        final @Nullable var caravanType = ILivingExtension.getCaravanType(entity);
+        if (caravanType == null) return;
+
+        final var playerTracker = ILivingExtension.playerTracker(entity);
+        final var players = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(32));
+        if (players.isEmpty()) return;
+        for (var player : players) {
+            if (playerTracker.contains(player.getUUID())) continue;
+            FragmentumNetworking.sendTo(player, ClientboundEncounterPayload.forCaravan(caravanType));
+            playerTracker.add(player.getUUID());
+        }
     }
 
     static void onLeashTick(Mob mob) {

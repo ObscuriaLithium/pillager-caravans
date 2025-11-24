@@ -18,6 +18,13 @@ public final class CaravanConfig {
 
     public static class Layout implements ConfigLayout {
 
+        @ConfigOptions.Value("showEncounterToast")
+        @ConfigOptions.Comment("Whether to show a toast when a player encounters a caravan.")
+        public boolean showEncounterToast = true;
+        @ConfigOptions.Value("toastLightMode")
+        @ConfigOptions.Comment("Whether to use light mode for the toast.")
+        public boolean toastLightMode = false;
+
         @ConfigOptions.Section("Spawning")
         public final Spawning spawning = new Spawning();
 

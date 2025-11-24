@@ -1,8 +1,1 @@
-- Caravan llamas now always have maximum carrying capacity.
-- Animals – especially llamas – now move more naturally in caravans (no more jittering or spinning).
-- Added a new **desert graverobbers** caravan.
-- Added a new **jungle graverobbers** caravan.
-- Added a new **plains marauders** caravan.
-- Added a new **snow miners** caravan.
-- Added a new **swamp harvesters** caravan.
-- Refactored caravan variant names and loot tables for better expandability. **Any custom datapacks overriding default caravans must be updated manually**.
+- Added a configurable **toast notification** that appears when you encounter a caravan, displaying its name.

@@ -34,12 +34,12 @@ public record CaravanVariation(
         return (int) (cooldown * CaravanConfig.common.spawning.cooldownMultiplier);
     }
 
-    public int spawn(ServerLevel level, BlockPos position) {
+    public int spawn(Holder<CaravanVariation> self, ServerLevel level, BlockPos position) {
 
         final var random = level.random;
         final var pos = position.mutable();
         pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
-        if (leader.spawn(level, pos, true) == null) return 0;
+        if (leader.spawn(self, level, pos, true) == null) return 0;
 
         final var entities = new ArrayList<Entity>();
         for (var member : members) {
@@ -47,7 +47,7 @@ public record CaravanVariation(
                 pos.setX(pos.getX() + random.nextInt(3) - random.nextInt(3));
                 pos.setZ(pos.getZ() + random.nextInt(3) - random.nextInt(3));
                 pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
-                final @Nullable var entity = member.spawn(level, pos, false);
+                final @Nullable var entity = member.spawn(self, level, pos, false);
                 if (entity != null) entities.add(entity);
             }
         }

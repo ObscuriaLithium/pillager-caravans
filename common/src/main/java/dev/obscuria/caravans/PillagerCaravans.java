@@ -1,8 +1,10 @@
 package dev.obscuria.caravans;
 
 import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
 import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import dev.obscuria.caravans.server.CaravanCommand;
+import dev.obscuria.fragmentum.network.FragmentumNetworking;
 import dev.obscuria.fragmentum.server.FragmentumServerRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameRules;
@@ -28,6 +30,15 @@ public final class PillagerCaravans {
         CaravanConfig.init();
         CaravanRegistries.init();
         FragmentumServerRegistry.registerCommand(CaravanCommand::register);
+        registerPayloads();
+    }
+
+    private static void registerPayloads() {
+        final var registrar = FragmentumNetworking.registrar(MODID);
+        registrar.registerClientbound(ClientboundEncounterPayload.class,
+                ClientboundEncounterPayload::encode,
+                ClientboundEncounterPayload::decode,
+                ClientboundEncounterPayload::handle);
     }
 
     static {

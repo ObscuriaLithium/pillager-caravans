@@ -69,7 +69,7 @@ public final class CaravanCommand {
     private static int spawn(CommandSourceStack source, BlockPos pos, Holder.Reference<CaravanVariation> variation) {
         final var id = variation.key().location();
         source.sendSuccess(() -> Component.translatable("commands.caravan.spawn.success", id, pos.getX(), pos.getY(), pos.getZ()), true);
-        return variation.value().spawn(source.getLevel(), pos);
+        return variation.value().spawn(variation, source.getLevel(), pos);
     }
 
     private static Holder.Reference<CaravanVariation> getCaravansVariation(CommandContext<CommandSourceStack> context, String name) {

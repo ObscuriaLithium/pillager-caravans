@@ -28,7 +28,7 @@ public final class CaravanSpawner implements CustomSpawner {
         final @Nullable var caravan = selectCaravan(level, pos);
         if (caravan == null) return 0;
 
-        final var totalSpawned = caravan.value().spawn(level, pos);
+        final var totalSpawned = caravan.value().spawn(caravan, level, pos);
         if (totalSpawned <= 0) return 0;
         cooldownTick = caravan.value().actualCooldown();
         return totalSpawned;
