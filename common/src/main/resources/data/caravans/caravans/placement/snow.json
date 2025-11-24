@@ -3,35 +3,52 @@
   "biomes": "#caravans:has_snow_caravan",
   "pools": [
     {
-      "weight": 2,
+      "weight": 10,
       "variations": [
         {
-          "variation": "caravans:snow_fish_tier_1",
+          "variation": "caravans:snow_fishers_tier_1",
           "weight": 5
         },
         {
-          "variation": "caravans:snow_fish_tier_2",
+          "variation": "caravans:snow_fishers_tier_2",
           "weight": 3
         },
         {
-          "variation": "caravans:snow_fish_tier_3",
+          "variation": "caravans:snow_fishers_tier_3",
           "weight": 1
         }
       ]
     },
     {
-      "weight": 1,
+      "weight": 10,
       "variations": [
         {
-          "variation": "caravans:snow_fur_tier_1",
+          "variation": "caravans:snow_hunters_tier_1",
           "weight": 5
         },
         {
-          "variation": "caravans:snow_fur_tier_2",
+          "variation": "caravans:snow_hunters_tier_2",
           "weight": 3
         },
         {
-          "variation": "caravans:snow_fur_tier_3",
+          "variation": "caravans:snow_hunters_tier_3",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "weight": 10,
+      "variations": [
+        {
+          "variation": "caravans:snow_miners_tier_1",
+          "weight": 5
+        },
+        {
+          "variation": "caravans:snow_miners_tier_2",
+          "weight": 3
+        },
+        {
+          "variation": "caravans:snow_miners_tier_3",
           "weight": 1
         }
       ]

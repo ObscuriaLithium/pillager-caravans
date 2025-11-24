@@ -2,7 +2,7 @@ package dev.obscuria.caravans.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.obscuria.caravans.content.caravans.CaravanMember;
+import dev.obscuria.caravans.content.caravan.CaravanMember;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,8 +1,8 @@
 package dev.obscuria.caravans.content.registry;
 
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.caravans.content.caravans.CaravanPlacement;
-import dev.obscuria.caravans.content.caravans.CaravanVariation;
+import dev.obscuria.caravans.content.caravan.CaravanPlacement;
+import dev.obscuria.caravans.content.caravan.CaravanVariation;
 import dev.obscuria.fragmentum.registry.FragmentumRegistry;
 import dev.obscuria.fragmentum.registry.Registrar;
 import net.minecraft.core.Registry;

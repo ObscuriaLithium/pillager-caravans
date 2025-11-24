@@ -93,7 +93,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
     artifact.addEnvironment("Server", "Client")
     artifact.addGameVersion("Forge", minecraft_version, "Java ${java_version}")
-    artifact.addRequirement("fragmentum-forge")
+    artifact.addRequirement("fragmentum")
 
     debugMode = release_debug_mode.toBoolean()
 }

@@ -1,7 +1,7 @@
 package dev.obscuria.caravans.content;
 
 import com.google.common.collect.ImmutableList;
-import dev.obscuria.caravans.content.caravans.CaravanSpawner;
+import dev.obscuria.caravans.content.caravan.CaravanSpawner;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

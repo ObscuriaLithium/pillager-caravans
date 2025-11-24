@@ -11,7 +11,7 @@
     {
       "type": "minecraft:llama",
       "armor": "minecraft:red_carpet",
-      "cargo": "caravans:caravans/cargo/exotics",
+      "cargo": "caravans:caravans/cargo/jungle_exotics",
       "count": 2
     }
   ]
