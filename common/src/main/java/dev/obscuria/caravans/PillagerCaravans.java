@@ -1,12 +1,15 @@
 package dev.obscuria.caravans;
 
-import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
 import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import dev.obscuria.caravans.server.CaravanCommand;
 import dev.obscuria.fragmentum.network.FragmentumNetworking;
+import dev.obscuria.fragmentum.packs.BuiltInPackBuilder;
 import dev.obscuria.fragmentum.server.FragmentumServerRegistry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +30,11 @@ public final class PillagerCaravans {
     }
 
     public static void init() {
-        CaravanConfig.init();
+        CommonConfig.init();
         CaravanRegistries.init();
         FragmentumServerRegistry.registerCommand(CaravanCommand::register);
         registerPayloads();
+        registerBuiltInPacks();
     }
 
     private static void registerPayloads() {
@@ -39,6 +43,13 @@ public final class PillagerCaravans {
                 ClientboundEncounterPayload::encode,
                 ClientboundEncounterPayload::decode,
                 ClientboundEncounterPayload::handle);
+    }
+
+    private static void registerBuiltInPacks() {
+        BuiltInPackBuilder.dataPack("packs/classic_caravans")
+                .displayName(Component.literal("Classic Caravans"))
+                .packSource(PackSource.BUILT_IN)
+                .register(PillagerCaravans.MODID);
     }
 
     static {

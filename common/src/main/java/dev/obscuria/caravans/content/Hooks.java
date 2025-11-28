@@ -1,7 +1,7 @@
 package dev.obscuria.caravans.content;
 
 import com.google.common.collect.ImmutableList;
-import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.content.caravan.CaravanSpawner;
 import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
 import dev.obscuria.fragmentum.network.FragmentumNetworking;
@@ -21,7 +21,7 @@ public interface Hooks {
     }
 
     static void onLivingTick(LivingEntity entity) {
-        if (!CaravanConfig.common.showEncounterToast) return;
+        if (!CommonConfig.SHOW_ENCOUNTER_TOAST.get()) return;
         if (entity.level().isClientSide()) return;
         if (entity.tickCount % 40 != 0) return;
         final @Nullable var caravanType = ILivingExtension.getCaravanType(entity);

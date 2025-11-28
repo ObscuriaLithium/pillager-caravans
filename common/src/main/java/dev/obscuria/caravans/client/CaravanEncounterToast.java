@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.client;
 
-import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.config.CommonConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -16,7 +16,7 @@ public record CaravanEncounterToast(ResourceLocation caravanType) implements Toa
     private static final Component TITLE;
 
     public Visibility render(GuiGraphics graphics, ToastComponent component, long timeSinceLastVisible) {
-        final var lightMode = CaravanConfig.common.toastLightMode;
+        final var lightMode = CommonConfig.TOAST_LIGHT_MODE.get();
         graphics.blit(TEXTURE, 0, 0, 0, lightMode ? 32 : 0, this.width(), this.height());
         final var caravanName = Component.translatable(caravanType.toLanguageKey("caravan"));
         graphics.drawString(component.getMinecraft().font, TITLE, 30, 7, lightMode ? 11141290 : 16755200, false);

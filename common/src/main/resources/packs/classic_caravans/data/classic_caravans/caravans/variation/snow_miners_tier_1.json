@@ -1,0 +1,17 @@
+{
+  "cooldown": 24000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:pillager",
+      "count": 2
+    },
+    {
+      "type": "minecraft:mule",
+      "cargo": "classic_caravans:cargo/snow_mine",
+      "count": 2
+    }
+  ]
+}

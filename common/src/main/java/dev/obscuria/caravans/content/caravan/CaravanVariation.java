@@ -2,7 +2,7 @@ package dev.obscuria.caravans.content.caravan;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -31,7 +31,7 @@ public record CaravanVariation(
     public static final Codec<CaravanVariation> DIRECT_CODEC;
 
     public int actualCooldown() {
-        return (int) (cooldown * CaravanConfig.common.spawning.cooldownMultiplier);
+        return (int) (cooldown * CommonConfig.SPAWN_COOLDOWN_MULTIPLIER.get());
     }
 
     public int spawn(Holder<CaravanVariation> self, ServerLevel level, BlockPos position) {

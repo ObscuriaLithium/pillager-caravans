@@ -24,6 +24,7 @@ dependencies {
     // Common
     modImplementation("dev.obscuria:fragmentum-fabric:1.20.1-${fragmentum_version}")
     modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:8.0.0")
+    modLocalRuntime("fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.2")
     implementation project(":common")
 }
 
@@ -78,13 +79,12 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     artifact.addEnvironment("Server", "Client")
     artifact.addGameVersion("Fabric", "Quilt", minecraft_version, "Java ${java_version}")
     artifact.addRequirement("fabric-api", "fragmentum-fabric")
-    artifact.addOptional("modmenu")
+    artifact.addOptional("modmenu", "config-menus-forge")
 
     debugMode = release_debug_mode.toBoolean()
 }
 
 modrinth {
-
     token = System.getenv("MD_TOKEN")
     projectId = modrinth_id
     uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
@@ -100,6 +100,7 @@ modrinth {
         required.project("fabric-api")
         required.project("fragmentum")
         optional.project("modmenu")
+        optional.project("forge-config-screens")
     }
 
     debugMode = release_debug_mode.toBoolean()

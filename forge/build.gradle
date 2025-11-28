@@ -94,12 +94,12 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     artifact.addEnvironment("Server", "Client")
     artifact.addGameVersion("Forge", minecraft_version, "Java ${java_version}")
     artifact.addRequirement("fragmentum")
+    artifact.addOptional("config-menus-forge")
 
     debugMode = release_debug_mode.toBoolean()
 }
 
 modrinth {
-
     token = System.getenv("MD_TOKEN")
     projectId = modrinth_id
     uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
@@ -113,6 +113,7 @@ modrinth {
     loaders = ["forge"]
     dependencies {
         required.project("fragmentum")
+        optional.project("forge-config-screens")
     }
 
     debugMode = release_debug_mode.toBoolean()

@@ -1,0 +1,25 @@
+{
+  "cooldown": 72000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:ravager"
+    },
+    {
+      "type": "minecraft:vindicator",
+      "count": 2
+    },
+    {
+      "type": "minecraft:pillager",
+      "count": 3
+    },
+    {
+      "type": "minecraft:llama",
+      "armor": "minecraft:brown_carpet",
+      "cargo": "classic_caravans:cargo/jungle_harvest",
+      "count": 6
+    }
+  ]
+}

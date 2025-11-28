@@ -1,7 +1,7 @@
 package dev.obscuria.caravans.content.caravan;
 
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.caravans.config.CaravanConfig;
+import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import dev.obscuria.caravans.content.IWeighted;
 import net.minecraft.core.BlockPos;
@@ -35,10 +35,11 @@ public final class CaravanSpawner implements CustomSpawner {
     }
 
     private boolean shouldSpawn(ServerLevel level, boolean spawnHostile) {
+        if (!CommonConfig.ENABLED.get()) return false;
         if (!spawnHostile || !level.getGameRules().getBoolean(PillagerCaravans.RULE_DO_CARAVAN_SPAWNING)) return false;
         if (--cooldownTick > 0) return false;
-        cooldownTick = CaravanConfig.common.spawning.failedCooldown;
-        return level.getDayTime() / CaravanConfig.common.spawning.worldAgeRequired >= 1;
+        cooldownTick = CommonConfig.SPAWN_FAILED_COOLDOWN.get();
+        return level.getDayTime() / CommonConfig.SPAWN_WORLD_AGE_REQUIRED.get() >= 1;
     }
 
     private @Nullable ServerPlayer selectPlayer(ServerLevel level) {
@@ -53,8 +54,8 @@ public final class CaravanSpawner implements CustomSpawner {
     @SuppressWarnings("deprecation")
     private @Nullable BlockPos.MutableBlockPos selectPosition(ServerLevel level, ServerPlayer player) {
         final var random = level.random;
-        final var distance = CaravanConfig.common.spawning.distance;
-        final var variance = CaravanConfig.common.spawning.distanceVariance;
+        final var distance = CommonConfig.SPAWN_DISTANCE.get();
+        final var variance = CommonConfig.SPAWN_DISTANCE_VARIANCE.get();
         final var xOffset = (distance + random.nextInt(variance)) * (random.nextBoolean() ? -1 : 1);
         final var yOffset = (distance + random.nextInt(variance)) * (random.nextBoolean() ? -1 : 1);
         final var pos = player.blockPosition().mutable().move(xOffset, 0, yOffset);
