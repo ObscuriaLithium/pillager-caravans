@@ -101,7 +101,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
     artifact.addEnvironment("Server", "Client")
     artifact.addGameVersion("NeoForge", minecraft_version, "Java ${java_version}")
-    artifact.addRequirement("fragmentum")
+    artifact.addRequirement("fragmentum-neoforge")
 
     debugMode = release_debug_mode.toBoolean()
 }
