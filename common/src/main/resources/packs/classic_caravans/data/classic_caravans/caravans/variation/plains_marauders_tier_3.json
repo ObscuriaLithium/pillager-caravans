@@ -1,0 +1,28 @@
+{
+  "cooldown": 72000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:ravager"
+    },
+    {
+      "type": "minecraft:evoker",
+      "count": 1
+    },
+    {
+      "type": "minecraft:vindicator",
+      "count": 2
+    },
+    {
+      "type": "minecraft:pillager",
+      "count": 2
+    },
+    {
+      "type": "minecraft:donkey",
+      "cargo": "classic_caravans:cargo/plains_supply",
+      "count": 6
+    }
+  ]
+}

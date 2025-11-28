@@ -1,0 +1,127 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+plugins {
+    id 'multiloader-loader'
+    id 'fabric-loom'
+    id 'net.darkhax.curseforgegradle'
+    id 'com.modrinth.minotaur'
+}
+
+dependencies {
+
+    // Minecraft
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
+
+    // Fabric
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    modImplementation("com.terraformersmc:modmenu:${fabric_modmenu_version}")
+
+    // Common
+    implementation("dev.obscuria:fragmentum-fabric:1.21.1-${fragmentum_version}")
+    modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.1.6")
+
+    // Lua
+    include('com.github.FiguraMC.luaj:luaj-core:3.0.8-figura')
+    include('com.github.FiguraMC.luaj:luaj-jse:3.0.8-figura')
+}
+
+loom {
+    def aw = project(':common').file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+    runs {
+        client {
+            client()
+            setConfigName('Fabric Client')
+            ideConfigGenerated(true)
+            runDir('runs/client')
+        }
+        server {
+            server()
+            setConfigName('Fabric Server')
+            ideConfigGenerated(true)
+            runDir('runs/server')
+        }
+    }
+}
+
+tasks.register("releaseFabric") {
+    dependsOn(tasks.named("build"))
+    doLast {
+        copy {
+            from(file("build/libs/${mod_id}-${project.name}-${minecraft_version}-${version}.jar"))
+            into(rootProject.file("output/$version"))
+        }
+    }
+}
+
+publishing {
+    publications {
+        create("apiPublication", MavenPublication) {
+            groupId = "dev.obscuria"
+            artifactId = "fragmentum-fabric"
+            version = "${minecraft_version}-${version}"
+            artifact(tasks.named("jar").get()) {
+                classifier = null
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "local"
+            url = uri("${rootProject.projectDir}/output/repo")
+        }
+    }
+}
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    dependsOn(tasks.named("releaseFabric"))
+    group = 'publishing'
+
+    apiToken = System.getenv("CF_TOKEN")
+    def file = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+    def artifact = upload(curseforge_id, file)
+
+    artifact.displayName = "${mod_name} ${project.version}"
+    artifact.changelogType = "markdown"
+    artifact.changelog = rootProject.file('CHANGELOG.md').text
+    artifact.releaseType = release_type
+
+    artifact.addEnvironment("Server", "Client")
+    artifact.addGameVersion("Fabric", "Quilt", minecraft_version, "Java ${java_version}")
+    artifact.addRequirement("fabric-api", "fragmentum-fabric")
+    artifact.addOptional("modmenu")
+
+    debugMode = release_debug_mode.toBoolean()
+}
+
+modrinth {
+    token = System.getenv("MD_TOKEN")
+    projectId = modrinth_id
+    uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+
+    versionName = "${mod_name} ${project.version}"
+    versionNumber = "${project.version}"
+    versionType = release_type
+    changelog = rootProject.file("CHANGELOG.md").text
+
+    gameVersions = ["${minecraft_version}"]
+    loaders = ["fabric", "quilt"]
+    dependencies {
+        required.project("fabric-api")
+        required.project("fragmentum")
+        optional.project("modmenu")
+    }
+
+    debugMode = release_debug_mode.toBoolean()
+}

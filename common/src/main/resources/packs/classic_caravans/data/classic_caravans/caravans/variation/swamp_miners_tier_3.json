@@ -1,0 +1,28 @@
+{
+  "cooldown": 72000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:ravager"
+    },
+    {
+      "type": "minecraft:vindicator",
+      "count": 2
+    },
+    {
+      "type": "minecraft:pillager",
+      "count": 1
+    },
+    {
+      "type": "minecraft:witch",
+      "count": 2
+    },
+    {
+      "type": "minecraft:donkey",
+      "cargo": "classic_caravans:cargo/swamp_mine",
+      "count": 6
+    }
+  ]
+}

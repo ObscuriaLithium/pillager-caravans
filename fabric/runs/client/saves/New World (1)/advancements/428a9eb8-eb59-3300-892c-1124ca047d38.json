@@ -1,0 +1,17 @@
+{
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-11-25 14:57:54 -0300"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:desert": "2025-11-25 14:58:07 -0300",
+      "minecraft:river": "2025-11-25 14:58:33 -0300",
+      "minecraft:windswept_savanna": "2025-11-25 14:57:55 -0300"
+    },
+    "done": false
+  },
+  "DataVersion": 3955
+}

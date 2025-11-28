@@ -1,0 +1,18 @@
+{
+  "cooldown": 24000,
+  "leader": {
+    "type": "minecraft:vindicator"
+  },
+  "members": [
+    {
+      "type": "minecraft:pillager",
+      "count": 2
+    },
+    {
+      "type": "minecraft:llama",
+      "armor": "minecraft:lime_carpet",
+      "cargo": "classic_caravans:cargo/desert_harvest",
+      "count": 2
+    }
+  ]
+}

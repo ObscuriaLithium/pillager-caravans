@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:chest",
+  "random_sequence": "caravans:caravans/cargo/desert_harvest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 3,
+        "max": 9
+      },
+      "entries": [
+        {
+          "weight": 40,
+          "type": "minecraft:item",
+          "name": "minecraft:sugar",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "weight": 60,
+          "type": "minecraft:item",
+          "name": "minecraft:sugar_cane",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

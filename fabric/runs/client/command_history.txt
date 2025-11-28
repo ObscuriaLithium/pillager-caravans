@@ -1,0 +1,38 @@
+/datapack
+/datapack list
+/caravan cooldown
+/caravan cooldown get
+/caravan cooldown reset
+/caravan spawn ~ ~ ~
+/caravan spawn ~ ~ ~ caravans:desert_graverobbers_tier_3
+/caravan spawn ~ ~ ~ caravans:desert_harvesters_tier_1
+/locate biome minecraft:desert
+/tp @s 1115 91 1238
+/caravan cooldown reset
+/
+/caravan cooldown reset
+/gamerule doCaravanSpawning
+/caravan cooldown reset
+/time set 25000
+/caravan cooldown reset
+/caravan spawn ~ ~ ~ caravans:desert_graverobbers_tier_3
+/loot give Player923 loot caravans:caravans/cargo/desert_harvest
+/caravan spawn ~ ~ ~ caravans:desert_harvesters_tier_2
+/loot give Player923 loot minecraft:chests/desert_pyramid
+/caravan spawn ~ ~ ~ caravans:desert_graverobbers_tier_2
+/config caravans common
+/config caravans
+/config caravans startup
+/config caravans client
+/config caravans server
+/config caravans common
+/caravan spawn ~ ~ ~ caravans:desert_graverobbers_tier_2
+/caravan spawn ~ ~ ~ caravans:desert_graverobbers_tier_3
+/caravan spawn 1449 83 1556 caravans:desert_graverobbers_tier_1
+/caravan spawn ~ ~ ~ caravans:swamp_alchemists_tier_2
+/datapack list
+/caravan spawn 1477 82 1531 classic_caravans:swamp_miners_tier_1
+/datapack disable "caravans/packs/classic_caravans"
+/datapack list
+/datapack enable "caravans/packs/classic_caravans"
+/caravan spawn ~ ~ ~ classic_caravans:desert_graverobbers_tier_1

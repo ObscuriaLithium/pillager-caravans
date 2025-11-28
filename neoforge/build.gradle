@@ -1,0 +1,126 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+    id 'net.darkhax.curseforgegradle'
+    id 'com.modrinth.minotaur'
+}
+
+neoForge {
+    version = neoforge_version
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+
+            // DataGen can be run by - "./gradlew :neoforge:runData" in Terminal.
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+
+    // Common
+    implementation("dev.obscuria:fragmentum-neoforge:1.21.1-${fragmentum_version}")
+
+    // Lua
+    jarJar('com.github.FiguraMC.luaj:luaj-core:3.0.8-figura')
+    jarJar('com.github.FiguraMC.luaj:luaj-jse:3.0.8-figura')
+}
+
+tasks.register("releaseNeoForge") {
+    dependsOn(tasks.named("build"))
+    doLast {
+        copy {
+            from(file("build/libs/${mod_id}-${project.name}-${minecraft_version}-${version}.jar"))
+            into(rootProject.file("output/$version"))
+        }
+    }
+}
+
+publishing {
+    publications {
+        create("apiPublication", MavenPublication) {
+            groupId = "dev.obscuria"
+            artifactId = "fragmentum-neoforge"
+            version = "${minecraft_version}-${version}"
+            artifact(tasks.named("jar").get()) {
+                classifier = null
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "local"
+            url = uri("${rootProject.projectDir}/output/repo")
+        }
+    }
+}
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    dependsOn(tasks.named("releaseNeoForge"))
+    group = 'publishing'
+
+    apiToken = System.getenv("CF_TOKEN")
+    def file = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+    def artifact = upload(curseforge_id, file)
+
+    artifact.displayName = "${mod_name} ${project.version}"
+    artifact.changelogType = "markdown"
+    artifact.changelog = rootProject.file('CHANGELOG.md').text
+    artifact.releaseType = release_type
+
+    artifact.addEnvironment("Server", "Client")
+    artifact.addGameVersion("NeoForge", minecraft_version, "Java ${java_version}")
+    artifact.addRequirement("fragmentum")
+
+    debugMode = release_debug_mode.toBoolean()
+}
+
+modrinth {
+    token = System.getenv("MD_TOKEN")
+    projectId = modrinth_id
+    uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+
+    versionName = "${mod_name} ${project.version}"
+    versionNumber = "${project.version}"
+    versionType = release_type
+    changelog = rootProject.file("CHANGELOG.md").text
+
+    gameVersions = ["${minecraft_version}"]
+    loaders = ["neoforge"]
+    dependencies {
+        required.project("fragmentum")
+    }
+
+    debugMode = release_debug_mode.toBoolean()
+}
