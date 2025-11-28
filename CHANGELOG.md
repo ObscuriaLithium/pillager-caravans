@@ -1,3 +1,1 @@
-- Fixed configuration handling so it no longer resets in rare scenarios.
-- Renamed several config options to decouple them from their category names.
-- Moved default caravans into the built-in Classic Caravans data pack, which can now be toggled on or off.
+- Fixed incorrect configuration file name
