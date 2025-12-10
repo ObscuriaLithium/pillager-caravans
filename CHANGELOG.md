@@ -1,4 +1,1 @@
-- Fixed configuration handling so it no longer resets in rare scenarios.
-- Renamed several config options to decouple them from their category names.
-- Added a new config option to disable caravan spawning entirely.
-- Moved default caravans into the built-in Classic Caravans data pack, which can now be toggled on or off.
+- Migrated to the newest Fragmentum release with its updated resource-handling API.

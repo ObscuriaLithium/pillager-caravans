@@ -14,7 +14,6 @@ java {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     // https://docs.gradle.org/current/userguide/declaring_repositories.html#declaring_content_exclusively_found_in_one_repository
     exclusiveContent {
@@ -38,6 +37,14 @@ repositories {
                 }
         )
         filter { includeGroup('org.parchmentmc.data') }
+    }
+    maven {
+        name = "ObscuriaLocal"
+        url = uri("/Users/obscuria/Modding/maven")
+    }
+    maven {
+        name = "Obscuria"
+        url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
     }
     maven {
         name = 'BlameJared'
@@ -126,7 +133,8 @@ processResources {
             'modrinth'                     : modrinth,
             'sources'                      : sources,
             'issues'                       : issues,
-            'discord'                      : discord
+            'discord'                      : discord,
+            'update_lookup'                : update_lookup
     ]
 
     filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {

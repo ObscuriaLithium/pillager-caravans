@@ -36,6 +36,10 @@ pluginManagement {
                 includeGroupAndSubgroups('net.minecraftforge')
             }
         }
+        maven {
+            name = "Obscuria"
+            url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
+        }
     }
 }
 

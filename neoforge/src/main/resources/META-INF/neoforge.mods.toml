@@ -12,6 +12,7 @@ issueTrackerURL = "${issues}"
     credits = ""
     authors = "${mod_author}"
     description = '''${description}'''
+    updateJSONURL = "${update_lookup}"
 
 [[mixins]]
     config = "${mod_id}.mixins.json"

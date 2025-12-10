@@ -49,7 +49,7 @@ public final class PillagerCaravans {
         BuiltInPackBuilder.dataPack("packs/classic_caravans")
                 .displayName(Component.literal("Classic Caravans"))
                 .packSource(PackSource.BUILT_IN)
-                .register(PillagerCaravans.MODID);
+                .register(PillagerCaravans.class, MODID);
     }
 
     static {

@@ -1,10 +1,12 @@
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
-
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
-    id 'net.darkhax.curseforgegradle'
-    id 'com.modrinth.minotaur'
+    id 'dev.obscuria.hekate'
+}
+
+dependencies {
+    // Common
+    implementation("dev.obscuria:fragmentum-neoforge:1.21.1-${fragmentum_version}")
 }
 
 neoForge {
@@ -46,81 +48,10 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-dependencies {
-
-    // Common
-    implementation("dev.obscuria:fragmentum-neoforge:1.21.1-${fragmentum_version}")
-
-    // Lua
-    jarJar('com.github.FiguraMC.luaj:luaj-core:3.0.8-figura')
-    jarJar('com.github.FiguraMC.luaj:luaj-jse:3.0.8-figura')
-}
-
-tasks.register("releaseNeoForge") {
-    dependsOn(tasks.named("build"))
-    doLast {
-        copy {
-            from(file("build/libs/${mod_id}-${project.name}-${minecraft_version}-${version}.jar"))
-            into(rootProject.file("output/$version"))
-        }
-    }
-}
-
-publishing {
-    publications {
-        create("apiPublication", MavenPublication) {
-            groupId = "dev.obscuria"
-            artifactId = "fragmentum-neoforge"
-            version = "${minecraft_version}-${version}"
-            artifact(tasks.named("jar").get()) {
-                classifier = null
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "local"
-            url = uri("${rootProject.projectDir}/output/repo")
-        }
-    }
-}
-
-tasks.register('curseforge', TaskPublishCurseForge) {
-    dependsOn(tasks.named("releaseNeoForge"))
-    group = 'publishing'
-
-    apiToken = System.getenv("CF_TOKEN")
-    def file = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
-    def artifact = upload(curseforge_id, file)
-
-    artifact.displayName = "${mod_name} ${project.version}"
-    artifact.changelogType = "markdown"
-    artifact.changelog = rootProject.file('CHANGELOG.md').text
-    artifact.releaseType = release_type
-
-    artifact.addEnvironment("Server", "Client")
-    artifact.addGameVersion("NeoForge", minecraft_version, "Java ${java_version}")
-    artifact.addRequirement("fragmentum-neoforge")
-
-    debugMode = release_debug_mode.toBoolean()
-}
-
 modrinth {
-    token = System.getenv("MD_TOKEN")
-    projectId = modrinth_id
-    uploadFile = rootProject.file("output/${version}/${mod_id}-${project.name}-${minecraft_version}-${version}.jar")
+    autoAddDependsOn = false
+}
 
-    versionName = "${mod_name} ${project.version}"
-    versionNumber = "${project.version}"
-    versionType = release_type
-    changelog = rootProject.file("CHANGELOG.md").text
-
-    gameVersions = ["${minecraft_version}"]
-    loaders = ["neoforge"]
-    dependencies {
-        required.project("fragmentum")
-    }
-
-    debugMode = release_debug_mode.toBoolean()
+hekate {
+    metadata = uri(metadata_lookup)
 }
