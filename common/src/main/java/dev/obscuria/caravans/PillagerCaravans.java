@@ -14,15 +14,12 @@ import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ServiceLoader;
-
 public final class PillagerCaravans {
 
     public static final String MODID = "caravans";
     public static final String DISPLAY_NAME = "Pillager Caravans";
     public static final Logger LOGGER = LoggerFactory.getLogger(DISPLAY_NAME);
 
-    public static final ICaravanServices SERVICES;
     public static final GameRules.Key<GameRules.BooleanValue> RULE_DO_CARAVAN_SPAWNING;
 
     public static ResourceLocation key(String name) {
@@ -53,7 +50,6 @@ public final class PillagerCaravans {
     }
 
     static {
-        SERVICES = ServiceLoader.load(ICaravanServices.class).findFirst().orElseThrow();
-        RULE_DO_CARAVAN_SPAWNING = SERVICES.registerGameRule("doCaravanSpawning", GameRules.Category.SPAWNING, true);
+        RULE_DO_CARAVAN_SPAWNING = GameRules.register("doCaravanSpawning", GameRules.Category.SPAWNING, GameRules.BooleanValue.create(true));
     }
 }

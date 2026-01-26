@@ -1,13 +1,14 @@
 package dev.obscuria.caravans.content;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface ILivingExtension {
+public interface ICaravanMember {
 
     List<UUID> caravans$playerTracker();
 
@@ -20,22 +21,22 @@ public interface ILivingExtension {
     boolean caravans$isCaravanMember();
 
     static List<UUID> playerTracker(LivingEntity entity) {
-        return ((ILivingExtension)entity).caravans$playerTracker();
+        return ((ICaravanMember)entity).caravans$playerTracker();
     }
 
     static void setCaravanType(LivingEntity entity, @Nullable ResourceLocation type) {
-        ((ILivingExtension)entity).caravans$setCaravanType(type);
+        ((ICaravanMember)entity).caravans$setCaravanType(type);
     }
 
     static @Nullable ResourceLocation getCaravanType(LivingEntity entity) {
-        return ((ILivingExtension)entity).caravans$getCaravanType();
+        return ((ICaravanMember)entity).caravans$getCaravanType();
     }
 
     static void setCaravanMember(LivingEntity entity, boolean value) {
-        ((ILivingExtension)entity).caravans$setCaravanMember(value);
+        ((ICaravanMember)entity).caravans$setCaravanMember(value);
     }
 
     static boolean isCaravanMember(LivingEntity entity) {
-        return ((ILivingExtension)entity).caravans$isCaravanMember();
+        return ((ICaravanMember)entity).caravans$isCaravanMember();
     }
 }

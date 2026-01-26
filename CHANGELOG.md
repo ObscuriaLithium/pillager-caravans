@@ -1,1 +1,7 @@
-- Fixed incorrect configuration file name
+- Increased the safe zone around villages where caravans cannot spawn.
+- Caravans can no longer spawn in artificially lit areas.
+- Added the ability for caravan animals to teleport to the leash holder.
+- Added the ability for caravan members to teleport to the leader.
+- Leads no longer break due to distance on caravan animals; they now trigger teleportation instead. Animals despawn together with the lead holder if it despawns due to inactivity. If the lead holder is killed, the animals do not despawn and can be reclaimed.
+- **All the above changes are configurable via the config file.**
+- Added compatibility with Forge 47.2.0 and higher (previously 47.2.30 and higher)

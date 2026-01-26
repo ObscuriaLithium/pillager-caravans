@@ -3,11 +3,11 @@ package dev.obscuria.caravans.server;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import dev.obscuria.caravans.content.caravan.CaravanSpawner;
 import dev.obscuria.caravans.content.registry.CaravanRegistries;
 import dev.obscuria.caravans.content.caravan.CaravanVariation;
-import dev.obscuria.caravans.mixin.ResourceKeyArgumentAccessor;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -72,8 +72,8 @@ public final class CaravanCommand {
         return variation.value().spawn(variation, source.getLevel(), pos);
     }
 
-    private static Holder.Reference<CaravanVariation> getCaravansVariation(CommandContext<CommandSourceStack> context, String name) {
-        return ResourceKeyArgumentAccessor.invokeResolveKey(context, name, CaravanRegistries.Keys.VARIATION, ERR_INVALID_VARIATION);
+    private static Holder.Reference<CaravanVariation> getCaravansVariation(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
+        return ResourceKeyArgument.resolveKey(context, name, CaravanRegistries.Keys.VARIATION, ERR_INVALID_VARIATION);
     }
 
     static {

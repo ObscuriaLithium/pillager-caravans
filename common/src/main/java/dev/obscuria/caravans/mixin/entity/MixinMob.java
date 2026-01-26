@@ -14,4 +14,9 @@ public abstract class MixinMob {
     private void onLeashTick(CallbackInfo info) {
         Hooks.onLeashTick((Mob) (Object) this);
     }
+
+    @Inject(method = "baseTick", at = @At("TAIL"))
+    private void customTick(CallbackInfo info) {
+        Hooks.onMobTick((Mob) (Object) this);
+    }
 }

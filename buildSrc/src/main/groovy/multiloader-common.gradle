@@ -40,6 +40,14 @@ repositories {
         filter { includeGroup('org.parchmentmc.data') }
     }
     maven {
+        name = "ObscuriaLocal"
+        url = uri("/Users/obscuria/Modding/maven")
+    }
+    maven {
+        name = "Obscuria"
+        url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
+    }
+    maven {
         url = "https://cursemaven.com"
     }
     maven {
@@ -78,11 +86,17 @@ dependencies {
     }
 }
 
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(rootProject.file("LICENSE.md"))
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(rootProject.file("LICENSE.md"))
     manifest {
         attributes([
@@ -118,6 +132,7 @@ processResources {
             'fragmentum_version'           : fragmentum_version,
             'curseforge'                   : curseforge,
             'modrinth'                     : modrinth,
+            'update_lookup'                : update_lookup,
             'sources'                      : sources,
             'issues'                       : issues,
             'discord'                      : discord

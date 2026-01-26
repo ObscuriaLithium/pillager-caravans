@@ -1,7 +1,7 @@
 package dev.obscuria.caravans.mixin.entity;
 
 import dev.obscuria.caravans.content.Hooks;
-import dev.obscuria.caravans.content.ILivingExtension;
+import dev.obscuria.caravans.content.ICaravanMember;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity implements ILivingExtension {
+public abstract class MixinLivingEntity implements ICaravanMember {
 
     @Unique private final List<UUID> caravans$playerTracker = new ArrayList<>();
     @Unique private @Nullable ResourceLocation caravans$caravanType = null;

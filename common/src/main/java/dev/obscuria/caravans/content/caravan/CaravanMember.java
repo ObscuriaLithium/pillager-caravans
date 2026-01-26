@@ -2,8 +2,7 @@ package dev.obscuria.caravans.content.caravan;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.content.IHorseExtension;
-import dev.obscuria.caravans.content.ILivingExtension;
+import dev.obscuria.caravans.content.ICaravanMember;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,14 +49,14 @@ public record CaravanMember(
         entity.setPos(pos.getX(), pos.getY(), pos.getZ());
 
         if (entity instanceof LivingEntity living) {
-            ILivingExtension.setCaravanMember(living, true);
+            ICaravanMember.setCaravanMember(living, true);
         }
 
         if (isLeader && entity instanceof PatrollingMonster monster) {
             monster.setPatrolLeader(true);
             monster.findPatrolTarget();
             final @Nullable var type = variation.unwrapKey().map(ResourceKey::location).orElse(null);
-            ILivingExtension.setCaravanType(monster, type);
+            ICaravanMember.setCaravanType(monster, type);
         }
 
         if (entity instanceof Mob mob) {
@@ -72,12 +71,16 @@ public record CaravanMember(
 
         if (entity instanceof AbstractHorse horse) {
             horse.setTamed(true);
-            armorItem.ifPresent(armor -> IHorseExtension.equipArmor(horse, armor.getDefaultInstance()));
+            armorItem.ifPresent(armor -> {
+                var stack = armor.getDefaultInstance();
+                if (!horse.isArmor(stack)) return;
+                horse.inventory.setItem(1, stack);
+            });
         }
 
         if (entity instanceof AbstractChestedHorse horse) {
             horse.setChest(true);
-            IHorseExtension.createInventory(horse);
+            horse.createInventory();
             cargoTable.ifPresent(cargo -> generateCargo(level, horse, cargo));
         }
 
@@ -87,7 +90,7 @@ public record CaravanMember(
 
     private void generateCargo(ServerLevel level, AbstractChestedHorse entity, ResourceLocation cargo) {
 
-        final var inventory = IHorseExtension.getInventory(entity);
+        final var inventory = entity.inventory;
         final var table = level.getServer().getLootData().getLootTable(cargo);
         final var params = new LootParams.Builder(level)
                 .withParameter(LootContextParams.ORIGIN, entity.position())
@@ -96,7 +99,7 @@ public record CaravanMember(
 
         generatingCaravanCargo = true;
         inventory.setItem(0, Items.STRUCTURE_VOID.getDefaultInstance());
-        table.fill(IHorseExtension.getInventory(entity), params, entity.getLootTableSeed());
+        table.fill(inventory, params, entity.getLootTableSeed());
         inventory.setItem(0, ItemStack.EMPTY);
         generatingCaravanCargo = false;
     }

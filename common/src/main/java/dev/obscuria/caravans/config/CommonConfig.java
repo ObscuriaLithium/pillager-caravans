@@ -14,6 +14,11 @@ public final class CommonConfig {
     public static final ConfigValue<Integer> SPAWN_FAILED_COOLDOWN;
     public static final ConfigValue<Integer> SPAWN_DISTANCE;
     public static final ConfigValue<Integer> SPAWN_DISTANCE_VARIANCE;
+    public static final ConfigValue<Integer> SPAWN_MAX_BLOCK_LIGHT;
+    public static final ConfigValue<Integer> VILLAGE_SAFE_ZONE_RADIUS;
+
+    public static final ConfigValue<Boolean> ALLOW_LEASHED_TELEPORT;
+    public static final ConfigValue<Boolean> ALLOW_FOLLOWER_TELEPORT;
 
     public static void init() {}
 
@@ -51,6 +56,31 @@ public final class CommonConfig {
         SPAWN_DISTANCE_VARIANCE = builder
                 .comment("Random variance added to the base spawn distance (0~value).")
                 .defineInt("spawnDistanceVariance", 32, 0, Integer.MAX_VALUE);
+        SPAWN_MAX_BLOCK_LIGHT = builder
+                .comment(
+                        "Maximum block light level allowed for caravan spawning.",
+                        "Caravans will only spawn if block light level is less than or equal to this value.",
+                        "Default: 4 (same rule as hostile mob spawning).")
+                .defineInt("spawnMaxBlockLight", 4, 0, 15);
+        VILLAGE_SAFE_ZONE_RADIUS = builder
+                .comment(
+                        "Safe zone radius around villages where caravans cannot spawn.",
+                        "Measured in SectionPos units (16x16x16 blocks).",
+                        "Default: 3 sections.")
+                .defineInt("villageSafeZoneRadius", 3, 0, 64);
+        builder.pop();
+
+        builder.push("CaravanBehavior");
+        ALLOW_LEASHED_TELEPORT = builder
+                .comment(
+                        "Whether caravan animals are allowed to teleport to the entity holding their leash.",
+                        "Disabling this may cause caravans to stretch or break apart.")
+                .defineBoolean("allowLeashedTeleport", true);
+        ALLOW_FOLLOWER_TELEPORT = builder
+                .comment(
+                        "Whether caravan members are allowed to teleport to their leader",
+                        "when they fall too far behind.")
+                .defineBoolean("allowFollowerTeleport", true);
         builder.pop();
 
         builder.buildCommon(PillagerCaravans.MODID);
