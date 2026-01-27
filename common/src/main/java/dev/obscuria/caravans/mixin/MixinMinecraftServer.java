@@ -12,7 +12,7 @@ import java.util.List;
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
 
-    @ModifyVariable(method = "createLevels", at = @At(value = "STORE", ordinal = 0), name = "list")
+    @ModifyVariable(method = "createLevels", at = @At(value = "STORE", ordinal = 0))
     private List<CustomSpawner> injectSpawners(List<CustomSpawner> spawners) {
         return Hooks.injectSpawners(spawners);
     }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(PathfinderMob.class)
 public abstract class MixinPathfinderMob {
 
-    @ModifyVariable(method = "tickLeash", name = "f", ordinal = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/PathfinderMob;onLeashDistance(F)V"))
+    @ModifyVariable(method = "tickLeash", ordinal = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/PathfinderMob;onLeashDistance(F)V"))
     private float injectTeleportAbility(float value) {
         if (!CommonConfig.ALLOW_LEASHED_TELEPORT.get()) return value;
         var entity = (PathfinderMob) (Object) this;
