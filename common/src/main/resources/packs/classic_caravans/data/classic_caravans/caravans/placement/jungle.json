@@ -5,52 +5,25 @@
     {
       "weight": 10,
       "variations": [
-        {
-          "variation": "classic_caravans:jungle_harvesters_tier_1",
-          "weight": 5
-        },
-        {
-          "variation": "classic_caravans:jungle_harvesters_tier_2",
-          "weight": 3
-        },
-        {
-          "variation": "classic_caravans:jungle_harvesters_tier_3",
-          "weight": 1
-        }
+        "classic_caravans:jungle_harvesters_tier_1",
+        "classic_caravans:jungle_harvesters_tier_2",
+        "classic_caravans:jungle_harvesters_tier_3"
       ]
     },
     {
       "weight": 10,
       "variations": [
-        {
-          "variation": "classic_caravans:jungle_exotics_tier_1",
-          "weight": 5
-        },
-        {
-          "variation": "classic_caravans:jungle_exotics_tier_2",
-          "weight": 3
-        },
-        {
-          "variation": "classic_caravans:jungle_exotics_tier_3",
-          "weight": 1
-        }
+        "classic_caravans:jungle_exotics_tier_1",
+        "classic_caravans:jungle_exotics_tier_2",
+        "classic_caravans:jungle_exotics_tier_3"
       ]
     },
     {
       "weight": 10,
       "variations": [
-        {
-          "variation": "classic_caravans:jungle_graverobbers_tier_1",
-          "weight": 5
-        },
-        {
-          "variation": "classic_caravans:jungle_graverobbers_tier_2",
-          "weight": 3
-        },
-        {
-          "variation": "classic_caravans:jungle_graverobbers_tier_3",
-          "weight": 1
-        }
+        "classic_caravans:jungle_graverobbers_tier_1",
+        "classic_caravans:jungle_graverobbers_tier_2",
+        "classic_caravans:jungle_graverobbers_tier_3"
       ]
     }
   ]

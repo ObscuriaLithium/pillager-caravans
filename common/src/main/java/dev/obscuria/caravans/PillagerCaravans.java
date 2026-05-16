@@ -1,8 +1,8 @@
 package dev.obscuria.caravans;
 
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
-import dev.obscuria.caravans.content.registry.CaravanRegistries;
+import dev.obscuria.caravans.common.network.ClientboundEncounterPayload;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
 import dev.obscuria.caravans.server.CaravanCommand;
 import dev.obscuria.fragmentum.network.FragmentumNetworking;
 import dev.obscuria.fragmentum.packs.BuiltInPackBuilder;
@@ -22,7 +22,7 @@ public final class PillagerCaravans {
 
     public static final GameRules.Key<GameRules.BooleanValue> RULE_DO_CARAVAN_SPAWNING;
 
-    public static ResourceLocation key(String name) {
+    public static ResourceLocation identifier(String name) {
         return new ResourceLocation(MODID, name);
     }
 

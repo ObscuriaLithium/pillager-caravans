@@ -16,3 +16,7 @@ Pillager Caravans adds roaming, cargo-filled convoys guarded by pillagers, vindi
 
 - [Curseforge](https://www.curseforge.com/minecraft/mc-mods/pillager-caravans)
 - [Modrinth](https://modrinth.com/mod/pillager-caravans)
+
+---
+
+Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md).

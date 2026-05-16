@@ -1,5 +1,5 @@
 {
-  "cooldown": 24000,
+  "tier": "small",
   "leader": {
     "type": "minecraft:vindicator"
   },

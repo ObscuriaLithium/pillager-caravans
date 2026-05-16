@@ -49,11 +49,12 @@ dependencies {
     // Mixins
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
-    // Common
-    modImplementation("dev.obscuria:fragmentum-forge:1.20.1-${fragmentum_version}")
+    implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
+    // Dependencies
     compileOnly project(":common")
 }
+
+apply from: 'dependencies.gradle'
 
 jar {
     finalizedBy('reobfJar')

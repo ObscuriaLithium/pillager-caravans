@@ -1,9 +1,9 @@
-package dev.obscuria.caravans.content.caravan;
+package dev.obscuria.caravans.common;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.caravans.content.registry.CaravanRegistries;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFixedCodec;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record CaravanVariation(
-        int cooldown,
+        CaravanTier tier,
         CaravanMember leader,
         @Unmodifiable List<CaravanMember> members
 ) {
@@ -30,8 +30,16 @@ public record CaravanVariation(
     public static final Codec<Holder<CaravanVariation>> CODEC;
     public static final Codec<CaravanVariation> DIRECT_CODEC;
 
-    public int actualCooldown() {
-        return (int) (cooldown * CommonConfig.SPAWN_COOLDOWN_MULTIPLIER.get());
+    public int spawnWeight() {
+        return tier.spawnWeight();
+    }
+
+    public int spawnCooldown() {
+        return (int) (tier.spawnCooldown() * CommonConfig.SPAWN_COOLDOWN_MULTIPLIER.get());
+    }
+
+    public int despawnDelay() {
+        return tier.despawnDelay();
     }
 
     public int spawn(Holder<CaravanVariation> self, ServerLevel level, BlockPos position) {
@@ -85,7 +93,7 @@ public record CaravanVariation(
     static {
         CODEC = RegistryFixedCodec.create(CaravanRegistries.Keys.VARIATION);
         DIRECT_CODEC = RecordCodecBuilder.create(codec -> codec.group(
-                Codec.INT.fieldOf("cooldown").forGetter(CaravanVariation::cooldown),
+                CaravanTier.CODEC.optionalFieldOf("tier", CaravanTier.MEDIUM).forGetter(CaravanVariation::tier),
                 CaravanMember.CODEC.fieldOf("leader").forGetter(CaravanVariation::leader),
                 CaravanMember.CODEC.listOf().fieldOf("members").forGetter(CaravanVariation::members)
         ).apply(codec, CaravanVariation::new));

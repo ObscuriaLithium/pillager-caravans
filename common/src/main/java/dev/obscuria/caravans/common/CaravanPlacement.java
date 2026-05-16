@@ -1,9 +1,8 @@
-package dev.obscuria.caravans.content.caravan;
+package dev.obscuria.caravans.common;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.content.registry.CaravanRegistries;
-import dev.obscuria.caravans.content.IWeighted;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;

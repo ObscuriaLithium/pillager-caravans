@@ -1,4 +1,4 @@
-package dev.obscuria.caravans.content;
+package dev.obscuria.caravans.common;
 
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;

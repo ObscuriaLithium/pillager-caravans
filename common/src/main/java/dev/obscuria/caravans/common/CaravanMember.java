@@ -1,8 +1,9 @@
-package dev.obscuria.caravans.content.caravan;
+package dev.obscuria.caravans.common;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.content.ICaravanMember;
+import dev.obscuria.caravans.common.data.CaravanLeaderData;
+import dev.obscuria.caravans.common.data.CaravanMemberData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -49,14 +50,16 @@ public record CaravanMember(
         entity.setPos(pos.getX(), pos.getY(), pos.getZ());
 
         if (entity instanceof LivingEntity living) {
-            ICaravanMember.setCaravanMember(living, true);
+            @Nullable var variationId = variation.unwrapKey().map(ResourceKey::location).orElse(null);
+            var despawnDelay = variation.value().despawnDelay();
+            ILivingExtension.setCaravanData(living, isLeader
+                    ? CaravanLeaderData.create(variationId, despawnDelay)
+                    : CaravanMemberData.create(despawnDelay));
         }
 
         if (isLeader && entity instanceof PatrollingMonster monster) {
             monster.setPatrolLeader(true);
             monster.findPatrolTarget();
-            final @Nullable var type = variation.unwrapKey().map(ResourceKey::location).orElse(null);
-            ICaravanMember.setCaravanType(monster, type);
         }
 
         if (entity instanceof Mob mob) {

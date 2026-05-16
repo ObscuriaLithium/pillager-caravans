@@ -1,4 +1,4 @@
-package dev.obscuria.caravans.content.network;
+package dev.obscuria.caravans.common.network;
 
 import dev.obscuria.caravans.client.CaravanEncounterToast;
 import net.minecraft.client.Minecraft;

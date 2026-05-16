@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin.goal;
 
-import dev.obscuria.caravans.content.ICaravanMember;
+import dev.obscuria.caravans.common.ILivingExtension;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import org.spongepowered.asm.mixin.Final;
@@ -17,7 +17,7 @@ public abstract class MixinRandomStrollGoal {
 
     @Inject(method = "canUse", at = @At("HEAD"), cancellable = true)
     private void modifyCanUse(CallbackInfoReturnable<Boolean> info) {
-        if (!ICaravanMember.isCaravanMember(mob)) return;
+        if (!ILivingExtension.isCaravanMember(mob)) return;
         if (!mob.isLeashed()) return;
         info.setReturnValue(false);
     }

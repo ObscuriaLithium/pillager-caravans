@@ -1,0 +1,29 @@
+repositories {
+    maven {
+        name = "ObscuriaLocal"
+        url = uri("/Users/obscuria/Modding/maven")
+    }
+    maven {
+        name = "Obscuria"
+        url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
+    }
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
+    }
+    maven {
+        // Yet Another Config Lib
+        name = 'Xander Maven'
+        url = 'https://maven.isxander.dev/releases'
+    }
+    maven {
+        // Forge Config API Port
+        name = "Fuzs Mod Resources"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+    }
+    maven {
+        // Mod Menu
+        name = "TerraformersMC"
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+}

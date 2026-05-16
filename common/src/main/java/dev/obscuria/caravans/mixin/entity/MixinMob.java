@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin.entity;
 
-import dev.obscuria.caravans.content.Hooks;
+import dev.obscuria.caravans.common.Hooks;
 import net.minecraft.world.entity.Mob;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,13 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Mob.class)
 public abstract class MixinMob {
 
-    @Inject(method = "tickLeash", at = @At("HEAD"))
-    private void onLeashTick(CallbackInfo info) {
-        Hooks.onLeashTick((Mob) (Object) this);
-    }
-
     @Inject(method = "baseTick", at = @At("TAIL"))
-    private void customTick(CallbackInfo info) {
+    private void customBaseTick(CallbackInfo info) {
         Hooks.onMobTick((Mob) (Object) this);
     }
 }

@@ -1,4 +1,4 @@
-package dev.obscuria.caravans.content.network;
+package dev.obscuria.caravans.common.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "dev.obscuria.caravans.fabric.FabricPillagerCaravans"
+    ],
+    "modmenu": [
+      "dev.obscuria.caravans.fabric.integrations.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -1,12 +1,7 @@
-package dev.obscuria.caravans.content;
+package dev.obscuria.caravans.common;
 
 import com.google.common.collect.ImmutableList;
-import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.caravans.content.caravan.CaravanSpawner;
-import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
-import dev.obscuria.fragmentum.network.FragmentumNetworking;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -26,24 +21,7 @@ public interface Hooks {
     }
 
     static boolean passIfNotCaravanMember(Entity entity) {
-        return !(entity instanceof LivingEntity living) || !ICaravanMember.isCaravanMember(living);
-    }
-
-    static void onLivingTick(LivingEntity entity) {
-        if (!CommonConfig.SHOW_ENCOUNTER_TOAST.get()) return;
-        if (entity.level().isClientSide()) return;
-        if (entity.tickCount % 40 != 0) return;
-        final @Nullable var caravanType = ICaravanMember.getCaravanType(entity);
-        if (caravanType == null) return;
-
-        final var playerTracker = ICaravanMember.playerTracker(entity);
-        final var players = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(32));
-        if (players.isEmpty()) return;
-        for (var player : players) {
-            if (playerTracker.contains(player.getUUID())) continue;
-            FragmentumNetworking.sendTo(player, ClientboundEncounterPayload.forCaravan(caravanType));
-            playerTracker.add(player.getUUID());
-        }
+        return !(entity instanceof LivingEntity living) || !ILivingExtension.isCaravanMember(living);
     }
 
     static void onMobTick(Mob entity) {
@@ -51,15 +29,6 @@ public interface Hooks {
         @Nullable var owner = entity.getLeashHolder();
         if (owner == null || passIfNotCaravanMember(owner)) return;
         entity.getLookControl().setLookAt(owner, 10.0F, (float) entity.getMaxHeadXRot());
-    }
-
-    static void onLeashTick(Mob entity) {
-        final @Nullable var owner = entity.getLeashHolder();
-        if (owner == null || !owner.isRemoved()) return;
-        if (!passIfNotCaravanMember(owner)) return;
-        if (owner.getRemovalReason() != Entity.RemovalReason.DISCARDED) return;
-        entity.dropLeash(false, false);
-        entity.discard();
     }
 
     static void onLeashDistance(PathfinderMob entity, float distance) {

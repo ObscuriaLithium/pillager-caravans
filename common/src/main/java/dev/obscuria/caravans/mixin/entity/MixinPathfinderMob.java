@@ -1,7 +1,7 @@
 package dev.obscuria.caravans.mixin.entity;
 
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.caravans.content.Hooks;
+import dev.obscuria.caravans.common.Hooks;
 import net.minecraft.world.entity.PathfinderMob;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

@@ -5,9 +5,11 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import dev.obscuria.caravans.content.caravan.CaravanSpawner;
-import dev.obscuria.caravans.content.registry.CaravanRegistries;
-import dev.obscuria.caravans.content.caravan.CaravanVariation;
+import dev.obscuria.caravans.common.ILivingExtension;
+import dev.obscuria.caravans.common.CaravanSpawner;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
+import dev.obscuria.caravans.common.CaravanVariation;
+import lombok.experimental.UtilityClass;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -16,7 +18,13 @@ import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
+
+@UtilityClass
 public final class CaravanCommand {
 
     private static final DynamicCommandExceptionType ERR_INVALID_VARIATION;
@@ -29,23 +37,25 @@ public final class CaravanCommand {
         dispatcher.register(Commands.literal("caravan").requires(it -> it.hasPermission(2))
                 .then(Commands.literal("cooldown")
                         .then(Commands.literal("get")
-                                .executes(it -> getCooldown(
-                                        it.getSource())))
+                                .executes(context -> getCooldown(context.getSource())))
                         .then(Commands.literal("reset")
-                                .executes(it -> resetCooldown(
-                                        it.getSource())))
+                                .executes(context -> resetCooldown(context.getSource())))
                         .then(Commands.literal("set")
                                 .then(Commands.argument("ticks", IntegerArgumentType.integer(0))
-                                        .executes(it -> setCooldown(
-                                                it.getSource(),
-                                                IntegerArgumentType.getInteger(it, "ticks"))))))
+                                        .executes(context -> {
+                                            var ticks = IntegerArgumentType.getInteger(context, "ticks");
+                                            return setCooldown(context.getSource(), ticks);
+                                        }))))
                 .then(Commands.literal("spawn")
                         .then(Commands.argument("position", BlockPosArgument.blockPos())
                                 .then(Commands.argument("variation", ResourceKeyArgument.key(CaravanRegistries.Keys.VARIATION))
-                                        .executes(it -> spawn(
-                                                it.getSource(),
-                                                BlockPosArgument.getBlockPos(it, "position"),
-                                                getCaravansVariation(it, "variation")))))));
+                                        .executes(context -> {
+                                            var position = BlockPosArgument.getBlockPos(context, "position");
+                                            var variation = getCaravansVariation(context, "variation");
+                                            return spawn(context.getSource(), position, variation);
+                                        }))))
+                .then(Commands.literal("despawn")
+                        .executes(context -> despawn(context.getSource()))));
     }
 
     public static int getCooldown(CommandSourceStack source) {
@@ -70,6 +80,24 @@ public final class CaravanCommand {
         final var id = variation.key().location();
         source.sendSuccess(() -> Component.translatable("commands.caravan.spawn.success", id, pos.getX(), pos.getY(), pos.getZ()), true);
         return variation.value().spawn(variation, source.getLevel(), pos);
+    }
+
+    private static int despawn(CommandSourceStack source) {
+        var despawned = new AtomicInteger(0);
+        var candidates = new HashSet<LivingEntity>();
+        for (var entity : source.getLevel().getAllEntities()) {
+            if (!(entity instanceof LivingEntity living)) continue;
+            if (!ILivingExtension.isCaravanMember(living)) continue;
+            candidates.add(living);
+        }
+        for (var entity : candidates) {
+            @Nullable var data = ILivingExtension.getCaravanData(entity);
+            if (data == null) continue;
+            if (!data.maybeDespawn(entity, true, false)) continue;
+            despawned.incrementAndGet();
+        }
+        source.sendSuccess(() -> Component.translatable("commands.caravan.despawn", despawned.get()), true);
+        return despawned.get();
     }
 
     private static Holder.Reference<CaravanVariation> getCaravansVariation(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
