@@ -2,8 +2,8 @@ package dev.obscuria.caravans.common;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.common.registry.CaravanRegistries;
+import dev.obscuria.caravans.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFixedCodec;
@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.entity.monster.illager.AbstractIllager;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -44,7 +44,7 @@ public record CaravanVariation(
 
     public int spawn(Holder<CaravanVariation> self, ServerLevel level, BlockPos position) {
 
-        final var random = level.random;
+        final var random = level.getRandom();
         final var pos = position.mutable();
         pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
         if (leader.spawn(self, level, pos, true) == null) return 0;
@@ -78,7 +78,7 @@ public record CaravanVariation(
                 animal.setLeashedTo(lastAnimal, true);
             } else {
                 Collections.shuffle(holders);
-                final @Nullable var holder = holders.isEmpty() ? null : holders.get(0);
+                final @Nullable var holder = holders.isEmpty() ? null : holders.getFirst();
                 if (holder != null) animal.setLeashedTo(holder, true);
             }
 

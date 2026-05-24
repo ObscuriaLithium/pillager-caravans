@@ -1,36 +1,36 @@
 package dev.obscuria.caravans.common.registry;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.caravans.common.data.CaravanData;
 import dev.obscuria.caravans.common.CaravanPlacement;
 import dev.obscuria.caravans.common.CaravanVariation;
-import dev.obscuria.fragmentum.registry.BootstrapContext;
-import dev.obscuria.fragmentum.registry.DelegatedRegistry;
-import dev.obscuria.fragmentum.registry.FragmentumRegistry;
-import dev.obscuria.fragmentum.registry.Registrar;
+import dev.obscuria.caravans.common.data.CaravanData;
+import dev.obscuria.fragmentum.v2.api.common.registry.BootstrapContext;
+import dev.obscuria.fragmentum.v2.api.common.registry.FragmentumRegistry;
+import dev.obscuria.fragmentum.v2.api.common.registry.Registrar;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
 public interface CaravanRegistries {
 
-    Registrar REGISTRAR = FragmentumRegistry.registrar(PillagerCaravans.MODID);
+    Registrar REGISTRAR = FragmentumRegistry.registrar(PillagerCaravans.MOD_ID);
 
-    DelegatedRegistry<Codec<? extends CaravanData>> DATA_TYPE = REGISTRAR.createRegistry(Keys.DATA_TYPE);
+    Registry<MapCodec<? extends CaravanData>> DATA_TYPE = REGISTRAR.createRegistry(Keys.DATA_TYPE);
 
     interface Keys {
 
-        ResourceKey<Registry<Codec<? extends CaravanData>>> DATA_TYPE = create("data_type");
+        ResourceKey<Registry<MapCodec<? extends CaravanData>>> DATA_TYPE = create("data_type");
         ResourceKey<Registry<CaravanVariation>> VARIATION = create("variation");
         ResourceKey<Registry<CaravanPlacement>> PLACEMENT = create("placement");
 
         private static <T> ResourceKey<Registry<T>> create(String name) {
-            return ResourceKey.createRegistryKey(PillagerCaravans.identifier(name));
+            return ResourceKey.createRegistryKey(PillagerCaravans.id(name));
         }
     }
 
     static void init() {
-        CaravanData.bootstrap(BootstrapContext.create(REGISTRAR, Keys.DATA_TYPE, PillagerCaravans::identifier));
+        CaravanGameRules.init();
+        CaravanData.bootstrap(BootstrapContext.create(REGISTRAR, Keys.DATA_TYPE, PillagerCaravans::id));
         REGISTRAR.createDataRegistry(Keys.VARIATION, () -> CaravanVariation.DIRECT_CODEC);
         REGISTRAR.createDataRegistry(Keys.PLACEMENT, () -> CaravanPlacement.DIRECT_CODEC);
     }

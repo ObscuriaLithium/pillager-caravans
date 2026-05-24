@@ -1,5 +1,4 @@
 dependencies {
-    // Dependencies
-    modCompileOnly("dev.obscuria:fragmentum-api:1.20.1-${fragmentum_version}")
-    modCompileOnly("dev.isxander:yet-another-config-lib:${yacl_version}+${minecraft_version}-forge")
+    api("dev.obscuria:fragmentum-common:${minecraft_version}-${fragmentum_version}")
+    api("dev.isxander:yet-another-config-lib:${yacl_version}+${minecraft_version}-neoforge")
 }

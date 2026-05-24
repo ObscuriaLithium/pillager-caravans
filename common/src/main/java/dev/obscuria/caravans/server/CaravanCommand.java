@@ -5,10 +5,11 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import dev.obscuria.caravans.common.ILivingExtension;
 import dev.obscuria.caravans.common.CaravanSpawner;
-import dev.obscuria.caravans.common.registry.CaravanRegistries;
 import dev.obscuria.caravans.common.CaravanVariation;
+import dev.obscuria.caravans.common.ILivingExtension;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
+import dev.obscuria.fragmentum.Fragmentum;
 import lombok.experimental.UtilityClass;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -34,7 +35,7 @@ public final class CaravanCommand {
             CommandBuildContext registryAccess,
             Commands.CommandSelection environment
     ) {
-        dispatcher.register(Commands.literal("caravan").requires(it -> it.hasPermission(2))
+        dispatcher.register(Commands.literal("caravan").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal("cooldown")
                         .then(Commands.literal("get")
                                 .executes(context -> getCooldown(context.getSource())))
@@ -60,26 +61,30 @@ public final class CaravanCommand {
 
     public static int getCooldown(CommandSourceStack source) {
         final var ticks = CaravanSpawner.INSTANCE.cooldownTick;
-        source.sendSuccess(() -> Component.translatable("commands.caravan.cooldown.get", ticks), false);
+        source.sendSuccess(() -> Component.translatableEscape("commands.caravan.cooldown.get", ticks), false);
         return ticks;
     }
 
     public static int resetCooldown(CommandSourceStack source) {
         CaravanSpawner.INSTANCE.cooldownTick = 0;
-        source.sendSuccess(() -> Component.translatable("commands.caravan.cooldown.reset"), true);
+        source.sendSuccess(() -> Component.translatableEscape("commands.caravan.cooldown.reset"), true);
         return 1;
     }
 
     public static int setCooldown(CommandSourceStack source, int ticks) {
         CaravanSpawner.INSTANCE.cooldownTick = ticks;
-        source.sendSuccess(() -> Component.translatable("commands.caravan.cooldown.set", ticks), true);
+        source.sendSuccess(() -> Component.translatableEscape("commands.caravan.cooldown.set", ticks), true);
         return 1;
     }
 
     private static int spawn(CommandSourceStack source, BlockPos pos, Holder.Reference<CaravanVariation> variation) {
-        final var id = variation.key().location();
-        source.sendSuccess(() -> Component.translatable("commands.caravan.spawn.success", id, pos.getX(), pos.getY(), pos.getZ()), true);
-        return variation.value().spawn(variation, source.getLevel(), pos);
+        source.sendSuccess(() -> Component.translatableEscape("commands.caravan.spawn.success", variation.key().identifier(), pos.getX(), pos.getY(), pos.getZ()), true);
+        try {
+            return variation.value().spawn(variation, source.getLevel(), pos);
+        } catch (Exception exception) {
+            Fragmentum.LOG.error("Failed to spawn caravan", exception);
+            return 0;
+        }
     }
 
     private static int despawn(CommandSourceStack source) {
@@ -96,7 +101,7 @@ public final class CaravanCommand {
             if (!data.maybeDespawn(entity, true, false)) continue;
             despawned.incrementAndGet();
         }
-        source.sendSuccess(() -> Component.translatable("commands.caravan.despawn", despawned.get()), true);
+        source.sendSuccess(() -> Component.translatableEscape("commands.caravan.despawn", despawned.get()), true);
         return despawned.get();
     }
 
@@ -105,6 +110,6 @@ public final class CaravanCommand {
     }
 
     static {
-        ERR_INVALID_VARIATION = new DynamicCommandExceptionType((it) -> Component.translatable("commands.caravan.spawn.invalid", it));
+        ERR_INVALID_VARIATION = new DynamicCommandExceptionType((id) -> Component.translatableEscape("commands.caravan.spawn.invalid", id));
     }
 }

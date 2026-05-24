@@ -1,8 +1,8 @@
 package dev.obscuria.caravans.mixin.goal;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.common.Hooks;
+import dev.obscuria.caravans.config.CommonConfig;
 import net.minecraft.world.entity.monster.PatrollingMonster;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:chest",
-  "random_sequence": "caravans:caravans/cargo/desert_grave",
+  "random_sequence": "caravans:caravans/cargo/jungle_grave",
   "pools": [
     {
       "rolls": {
@@ -11,7 +11,7 @@
         {
           "weight": 1,
           "type": "minecraft:loot_table",
-          "name": "minecraft:chests/desert_pyramid"
+          "value": "minecraft:chests/jungle_temple"
         }
       ]
     }

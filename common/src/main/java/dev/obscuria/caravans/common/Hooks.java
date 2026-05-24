@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,8 +31,7 @@ public interface Hooks {
         entity.getLookControl().setLookAt(owner, 10.0F, (float) entity.getMaxHeadXRot());
     }
 
-    static void onLeashDistance(PathfinderMob entity, float distance) {
-        if (distance < 9.0F) return;
+    static void leashTooFarBehavior(PathfinderMob entity) {
         @Nullable var owner = entity.getLeashHolder();
         if (owner == null) return;
         teleportTo(entity, owner);
@@ -54,15 +53,15 @@ public interface Hooks {
         } else if (!canTeleportTo(entity, new BlockPos(x, y, z))) {
             return false;
         } else {
-            entity.moveTo(x + 0.5, y, z + 0.5, entity.getYRot(), entity.getXRot());
+            entity.snapTo(x + 0.5, y, z + 0.5, entity.getYRot(), entity.getXRot());
             entity.getNavigation().stop();
             return true;
         }
     }
 
     private static boolean canTeleportTo(Mob entity, BlockPos pos) {
-        var blockPathType = WalkNodeEvaluator.getBlockPathTypeStatic(entity.level(), pos.mutable());
-        if (blockPathType != BlockPathTypes.WALKABLE) return false;
+        var blockPathType = WalkNodeEvaluator.getPathTypeStatic(entity, pos);
+        if (blockPathType != PathType.WALKABLE) return false;
         var state = entity.level().getBlockState(pos.below());
         if (!entity.isNoGravity() && state.getBlock() instanceof LeavesBlock) {
             return false;

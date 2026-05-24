@@ -1,24 +1,26 @@
 package dev.obscuria.caravans.mixin.entity;
 
-import dev.obscuria.caravans.config.CommonConfig;
 import dev.obscuria.caravans.common.Hooks;
+import dev.obscuria.caravans.config.CommonConfig;
+import net.minecraft.world.entity.Leashable;
 import net.minecraft.world.entity.PathfinderMob;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PathfinderMob.class)
-public abstract class MixinPathfinderMob {
+@Mixin(Leashable.class)
+public interface MixinPathfinderMob {
 
-    @ModifyVariable(method = "tickLeash", ordinal = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/PathfinderMob;onLeashDistance(F)V"))
-    private float injectTeleportAbility(float value) {
-        if (!CommonConfig.ALLOW_LEASHED_TELEPORT.get()) return value;
-        var entity = (PathfinderMob) (Object) this;
-        if (Hooks.passIfNotCaravanMember(entity)) return value;
+    @Inject(method = "leashTooFarBehaviour", at = @At("HEAD"), cancellable = true)
+    private void modifyLeashTooFarBehavior(CallbackInfo ci) {
+        if (!CommonConfig.ALLOW_LEASHED_TELEPORT.get()) return;
+        if (!(this instanceof PathfinderMob entity)) return;
+        if (Hooks.passIfNotCaravanMember(entity)) return;
         @Nullable var owner = entity.getLeashHolder();
-        if (owner == null || Hooks.passIfNotCaravanMember(owner)) return value;
-        Hooks.onLeashDistance(entity, value);
-        return Math.min(value, 8F);
+        if (owner == null || Hooks.passIfNotCaravanMember(owner)) return;
+        Hooks.leashTooFarBehavior(entity);
+        ci.cancel();
     }
 }

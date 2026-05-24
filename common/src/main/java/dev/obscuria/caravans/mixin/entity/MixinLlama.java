@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.obscuria.caravans.common.ILivingExtension;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.equine.Llama;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Llama.class)
 public abstract class MixinLlama {
 
-    @WrapOperation(method = "finalizeSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/Llama;setRandomStrength(Lnet/minecraft/util/RandomSource;)V"))
+    @WrapOperation(method = "finalizeSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/equine/Llama;setRandomStrength(Lnet/minecraft/util/RandomSource;)V"))
     private void overrideInitialStrength(Llama llama, RandomSource random, Operation<Void> original) {
         if (ILivingExtension.isCaravanMember(llama)) {
             this.setStrength(5);

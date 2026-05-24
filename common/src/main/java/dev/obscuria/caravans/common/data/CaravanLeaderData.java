@@ -1,14 +1,15 @@
 package dev.obscuria.caravans.common.data;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.obscuria.caravans.PillagerCaravans;
 import dev.obscuria.caravans.common.network.ClientboundEncounterPayload;
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.fragmentum.network.FragmentumNetworking;
+import dev.obscuria.fragmentum.v2.api.common.network.FragmentumNetworking;
 import lombok.Getter;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
@@ -19,25 +20,25 @@ import java.util.UUID;
 
 public final class CaravanLeaderData extends CaravanData {
 
-    public static final ResourceLocation INVALID_TYPE = PillagerCaravans.identifier("invalid");
-    public static final Codec<CaravanLeaderData> CODEC;
+    public static final Identifier INVALID_TYPE = PillagerCaravans.id("invalid");
+    public static final MapCodec<CaravanLeaderData> CODEC;
 
     @Getter private final HashSet<UUID> trackedPlayers;
-    @Getter private final ResourceLocation caravanType;
+    @Getter private final Identifier caravanType;
 
-    public static CaravanLeaderData create(@Nullable ResourceLocation caravanType, int despawnDelay) {
+    public static CaravanLeaderData create(@Nullable Identifier caravanType, int despawnDelay) {
         caravanType = caravanType == null ? INVALID_TYPE : caravanType;
         return new CaravanLeaderData(List.of(), caravanType, despawnDelay);
     }
 
-    private CaravanLeaderData(List<UUID> trackedPlayers, ResourceLocation caravanType, int despawnDelay) {
+    private CaravanLeaderData(List<UUID> trackedPlayers, Identifier caravanType, int despawnDelay) {
         super(despawnDelay);
         this.trackedPlayers = new HashSet<>(trackedPlayers);
         this.caravanType = caravanType;
     }
 
     @Override
-    public Codec<CaravanLeaderData> codec() {
+    public MapCodec<CaravanLeaderData> codec() {
         return CODEC;
     }
 
@@ -61,9 +62,9 @@ public final class CaravanLeaderData extends CaravanData {
     }
 
     static {
-        CODEC = RecordCodecBuilder.create(codec -> codec.group(
+        CODEC = RecordCodecBuilder.mapCodec(codec -> codec.group(
                 UUIDUtil.STRING_CODEC.listOf().fieldOf("tracked_players").forGetter(CaravanLeaderData::trackedPlayersList),
-                ResourceLocation.CODEC.fieldOf("caravan_type").forGetter(CaravanLeaderData::getCaravanType),
+                Identifier.CODEC.fieldOf("caravan_type").forGetter(CaravanLeaderData::getCaravanType),
                 Codec.INT.fieldOf("despawn_delay").forGetter(CaravanLeaderData::getDespawnDelay)
         ).apply(codec, CaravanLeaderData::new));
     }

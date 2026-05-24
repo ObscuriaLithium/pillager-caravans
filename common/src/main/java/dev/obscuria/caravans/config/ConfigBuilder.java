@@ -3,8 +3,8 @@ package dev.obscuria.caravans.config;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
 import dev.obscuria.caravans.PillagerCaravans;
-import dev.obscuria.fragmentum.config.ConfigValue;
-import dev.obscuria.fragmentum.util.easing.Easing;
+import dev.obscuria.fragmentum.v2.api.common.Easing;
+import dev.obscuria.fragmentum.v2.api.config.ConfigValue;
 import lombok.experimental.UtilityClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -94,11 +94,11 @@ public final class ConfigBuilder {
     }
 
     static MutableComponent translate(String key) {
-        return Component.translatable("config.%s.%s".formatted(PillagerCaravans.MODID, key));
+        return Component.translatable("config.%s.%s".formatted(PillagerCaravans.MOD_ID, key));
     }
 
     static MutableComponent translate(String key, Object... args) {
-        return Component.translatable("config.%s.%s".formatted(PillagerCaravans.MODID, key), args);
+        return Component.translatable("config.%s.%s".formatted(PillagerCaravans.MOD_ID, key), args);
     }
 
     @UtilityClass

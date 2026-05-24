@@ -2,7 +2,7 @@ package dev.obscuria.caravans.common;
 
 import com.mojang.serialization.Codec;
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.fragmentum.config.ConfigValue;
+import dev.obscuria.fragmentum.v2.api.config.ConfigValue;
 import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;

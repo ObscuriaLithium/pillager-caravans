@@ -1,9 +1,8 @@
-accessWidener v2 named
+accessWidener v2 official
 
-accessible field net/minecraft/world/entity/animal/horse/AbstractHorse inventory Lnet/minecraft/world/SimpleContainer;
+accessible field net/minecraft/world/entity/animal/equine/AbstractHorse inventory Lnet/minecraft/world/SimpleContainer;
 accessible field net/minecraft/world/damagesource/CombatTracker inCombat Z
 
-accessible method net/minecraft/world/level/GameRules register (Ljava/lang/String;Lnet/minecraft/world/level/GameRules$Category;Lnet/minecraft/world/level/GameRules$Type;)Lnet/minecraft/world/level/GameRules$Key;
-accessible method net/minecraft/world/level/GameRules$BooleanValue create (Z)Lnet/minecraft/world/level/GameRules$Type;
+accessible method net/minecraft/world/entity/animal/equine/AbstractHorse createInventory ()V
+accessible method net/minecraft/world/level/gamerules/GameRules registerBoolean (Ljava/lang/String;Lnet/minecraft/world/level/gamerules/GameRuleCategory;Z)Lnet/minecraft/world/level/gamerules/GameRule;
 accessible method net/minecraft/commands/arguments/ResourceKeyArgument resolveKey (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Lnet/minecraft/resources/ResourceKey;Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;)Lnet/minecraft/core/Holder$Reference;
-accessible method net/minecraft/world/entity/animal/horse/AbstractHorse createInventory ()V

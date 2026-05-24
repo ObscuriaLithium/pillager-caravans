@@ -1,11 +1,12 @@
 package dev.obscuria.caravans.common.data;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 public final class CaravanMemberData extends CaravanData {
 
-    public static final Codec<CaravanMemberData> CODEC;
+    public static final MapCodec<CaravanMemberData> CODEC;
 
     public static CaravanMemberData create(int despawnDelay) {
         return new CaravanMemberData(despawnDelay);
@@ -16,12 +17,12 @@ public final class CaravanMemberData extends CaravanData {
     }
 
     @Override
-    public Codec<CaravanMemberData> codec() {
+    public MapCodec<CaravanMemberData> codec() {
         return CODEC;
     }
 
     static {
-        CODEC = RecordCodecBuilder.create(codec -> codec.group(
+        CODEC = RecordCodecBuilder.mapCodec(codec -> codec.group(
                 Codec.INT.fieldOf("despawn_delay").forGetter(CaravanMemberData::getDespawnDelay)
         ).apply(codec, CaravanMemberData::new));
     }

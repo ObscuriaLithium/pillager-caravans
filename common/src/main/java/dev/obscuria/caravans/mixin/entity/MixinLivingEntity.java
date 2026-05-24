@@ -1,9 +1,10 @@
 package dev.obscuria.caravans.mixin.entity;
 
-import dev.obscuria.caravans.common.data.CaravanData;
 import dev.obscuria.caravans.common.ILivingExtension;
-import net.minecraft.nbt.CompoundTag;
+import dev.obscuria.caravans.common.data.CaravanData;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,12 +35,12 @@ public abstract class MixinLivingEntity implements ILivingExtension {
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void addCustomSaveData(CompoundTag compound, CallbackInfo info) {
-        CaravanData.save(caravans$caravanData, compound);
+    private void addCustomSaveData(ValueOutput output, CallbackInfo ci) {
+        CaravanData.save(caravans$caravanData, output);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void readCustomSaveData(CompoundTag compound, CallbackInfo info) {
-        caravans$caravanData = CaravanData.load(compound);
+    private void readCustomSaveData(ValueInput input, CallbackInfo ci) {
+        caravans$caravanData = CaravanData.load(input);
     }
 }
