@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin.goal;
 
-import dev.obscuria.caravans.content.ILivingExtension;
+import dev.obscuria.caravans.common.ILivingExtension;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import org.spongepowered.asm.mixin.Final;

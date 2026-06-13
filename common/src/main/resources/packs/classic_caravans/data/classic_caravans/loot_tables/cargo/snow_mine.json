@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:chest",
+  "random_sequence": "caravans:caravans/cargo/snow_mine",
+  "pools": [
+    {
+      "rolls": {
+        "min": 3,
+        "max": 9
+      },
+      "entries": [
+        {
+          "weight": 48,
+          "type": "minecraft:item",
+          "name": "minecraft:coal",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 16
+              }
+            }
+          ]
+        },
+        {
+          "weight": 48,
+          "type": "minecraft:item",
+          "name": "minecraft:charcoal",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "weight": 2,
+          "type": "minecraft:item",
+          "name": "minecraft:lava_bucket",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

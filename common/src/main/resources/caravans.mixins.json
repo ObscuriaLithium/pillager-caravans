@@ -5,18 +5,16 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "entity.MixinAbstractHorse",
-    "entity.MixinLivingEntity",
-    "entity.MixinLlama",
-    "entity.MixinLeashable",
-    "goal.MixinLlamaFollowCaravanGoal",
-    "goal.MixinLongDistancePatrolGoal",
-    "goal.MixinRandomStrollGoal",
     "MixinLootTable",
     "MixinMinecraftServer",
-    "ResourceKeyArgumentAccessor"
+    "entity.MixinLeashable",
+    "entity.MixinLivingEntity",
+    "entity.MixinLlama",
+    "entity.MixinMob",
+    "goal.MixinLlamaFollowCaravanGoal",
+    "goal.MixinLongDistancePatrolGoal",
+    "goal.MixinRandomStrollGoal"
   ],
-  "client": [],
   "server": [],
   "injectors": {
     "defaultRequire": 1

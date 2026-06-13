@@ -47,22 +47,23 @@ repositories {
         url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
     }
     maven {
-        name = 'BlameJared'
-        url = 'https://maven.blamejared.com'
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
     }
     maven {
-        name = "Terraformers MC"
-        url = 'https://maven.terraformersmc.com/releases/'
+        // Yet Another Config Lib
+        name = 'Xander Maven'
+        url = 'https://maven.isxander.dev/releases'
     }
     maven {
+        // Forge Config API Port
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
     maven {
-        url 'https://jitpack.io'
-        content {
-            includeGroup "com.github.FiguraMC.luaj"
-        }
+        // Mod Menu
+        name = "TerraformersMC"
+        url = 'https://maven.terraformersmc.com/releases/'
     }
 }
 
@@ -73,9 +74,6 @@ dependencies {
     annotationProcessor("org.checkerframework:checker:3.43.0")
     compileOnly("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.projectlombok:lombok:1.18.34")
-
-    api('com.github.FiguraMC.luaj:luaj-core:3.0.8-figura')
-    api('com.github.FiguraMC.luaj:luaj-jse:3.0.8-figura')
 }
 
 // Declare capabilities on the outgoing configurations.

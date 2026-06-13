@@ -4,10 +4,7 @@ plugins {
     id 'dev.obscuria.hekate'
 }
 
-dependencies {
-    // Common
-    implementation("dev.obscuria:fragmentum-neoforge:1.21.1-${fragmentum_version}")
-}
+apply from: 'dependencies.gradle'
 
 neoForge {
     version = neoforge_version
@@ -46,7 +43,9 @@ neoForge {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
 
 modrinth {
     autoAddDependsOn = false

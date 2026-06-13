@@ -1,8 +1,8 @@
 package dev.obscuria.caravans;
 
 import dev.obscuria.caravans.config.CommonConfig;
-import dev.obscuria.caravans.content.network.ClientboundEncounterPayload;
-import dev.obscuria.caravans.content.registry.CaravanRegistries;
+import dev.obscuria.caravans.common.network.ClientboundEncounterPayload;
+import dev.obscuria.caravans.common.registry.CaravanRegistries;
 import dev.obscuria.caravans.server.CaravanCommand;
 import dev.obscuria.fragmentum.content.network.FragmentumNetworking;
 import dev.obscuria.fragmentum.content.packs.BuiltInPackBuilder;
@@ -14,19 +14,15 @@ import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ServiceLoader;
-
 public final class PillagerCaravans {
 
-    public static final String MODID = "caravans";
-    public static final String DISPLAY_NAME = "Pillager Caravans";
-    public static final Logger LOGGER = LoggerFactory.getLogger(DISPLAY_NAME);
-
-    public static final ICaravanServices SERVICES;
+    public static final String MOD_ID = "caravans";
+    public static final String MOD_NAME = "Pillager Caravans";
+    public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
     public static final GameRules.Key<GameRules.BooleanValue> RULE_DO_CARAVAN_SPAWNING;
 
-    public static ResourceLocation key(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, name);
+    public static ResourceLocation id(String name) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public static void init() {
@@ -38,7 +34,7 @@ public final class PillagerCaravans {
     }
 
     private static void registerPayloads() {
-        final var registrar = FragmentumNetworking.registrar(MODID);
+        final var registrar = FragmentumNetworking.registrar(MOD_ID);
         registrar.registerClientbound(ClientboundEncounterPayload.class,
                 ClientboundEncounterPayload.TYPE,
                 ClientboundEncounterPayload.CODEC,
@@ -49,11 +45,10 @@ public final class PillagerCaravans {
         BuiltInPackBuilder.dataPack("packs/classic_caravans")
                 .displayName(Component.literal("Classic Caravans"))
                 .packSource(PackSource.BUILT_IN)
-                .register(PillagerCaravans.class, MODID);
+                .register(PillagerCaravans.class, MOD_ID);
     }
 
     static {
-        SERVICES = ServiceLoader.load(ICaravanServices.class).findFirst().orElseThrow();
-        RULE_DO_CARAVAN_SPAWNING = SERVICES.registerGameRule("doCaravanSpawning", GameRules.Category.SPAWNING, true);
+        RULE_DO_CARAVAN_SPAWNING = GameRules.register("doCaravanSpawning", GameRules.Category.SPAWNING, GameRules.BooleanValue.create(true));
     }
 }

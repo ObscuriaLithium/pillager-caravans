@@ -1,6 +1,6 @@
 package dev.obscuria.caravans.mixin.goal;
 
-import dev.obscuria.caravans.content.ILivingExtension;
+import dev.obscuria.caravans.common.ILivingExtension;
 import net.minecraft.world.entity.ai.goal.LlamaFollowCaravanGoal;
 import net.minecraft.world.entity.animal.horse.Llama;
 import org.spongepowered.asm.mixin.Final;

@@ -37,6 +37,9 @@ pluginManagement {
             }
         }
         maven {
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
             name = "Obscuria"
             url = "https://raw.githubusercontent.com/ObscuriaLithium/modding/main/maven/"
         }
@@ -47,7 +50,7 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-rootProject.name = 'Pillager-Caravans'
+rootProject.name = 'pillager-caravans'
 include('common')
 include('fabric')
 include('neoforge')

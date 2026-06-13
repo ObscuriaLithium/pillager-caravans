@@ -1,0 +1,84 @@
+{
+  "type": "minecraft:chest",
+  "random_sequence": "caravans:caravans/cargo/plains_dyes",
+  "pools": [
+    {
+      "rolls": {
+        "min": 3,
+        "max": 9
+      },
+      "entries": [
+        {
+          "weight": 20,
+          "type": "minecraft:item",
+          "name": "minecraft:red_dye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        },
+        {
+          "weight": 20,
+          "type": "minecraft:item",
+          "name": "minecraft:green_dye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        },
+        {
+          "weight": 20,
+          "type": "minecraft:item",
+          "name": "minecraft:blue_dye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        },
+        {
+          "weight": 20,
+          "type": "minecraft:item",
+          "name": "minecraft:white_dye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        },
+        {
+          "weight": 20,
+          "type": "minecraft:item",
+          "name": "minecraft:black_dye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

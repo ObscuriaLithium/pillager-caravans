@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:chest",
+  "random_sequence": "caravans:caravans/cargo/jungle_harvest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 3,
+        "max": 9
+      },
+      "entries": [
+        {
+          "weight": 30,
+          "type": "minecraft:item",
+          "name": "minecraft:cookie",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "weight": 70,
+          "type": "minecraft:item",
+          "name": "minecraft:cocoa_beans",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
